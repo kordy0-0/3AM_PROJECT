@@ -155,7 +155,7 @@ h2 {
     position: relative;
 }
 .footer-column a:hover {
-    text-decoration: underline;
+    text-decoration:none;
     color: #ff6600;
 }
 .footer-column a::after {
