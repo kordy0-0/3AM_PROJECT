@@ -3,59 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3AM-PROJECT</title>
+    <title>We Elevate the Beauty of Your Home</title>
     <link rel="stylesheet" href="../css/home.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="../css/home.css">
+    <!-- Adding Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <section class="cards">
-        <h2>Check out our useful cards</h2>
-        <div class="cards-container">
-            <div class="card">
-                <img src="../images/pexels-psad-1624990.jpg" alt="University Building">
-                <div class="card-content">
-                    <h3>Your complete card to Universities in Australia</h3>
-                    <p>Australian universities rank as some of the very best in the world. To help you decide which is going to be the best for you we have developed this handy card.</p>
-                    <a href="#">Go to university cards →</a>
-                </div>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="logo">HOMESTEAD</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#strategy">Strategy</a>
+            <a href="#statistics">Statistics</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="menu-icon">&#9776;</div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero" id="home">
+        <div class="hero-content">
+            <h1>Rent your home.<br>Own your life.<br>Start of something great.</h1>
+            <p>We combine expertise across disciplines, locations, and sectors. The practice is an active thought leader in social practice, developing award-winning architectural projects and urban strategies at a variety of scales.</p>
+            <a href="#contact" class="book-btn">BOOK NOW</a>
+        </div>
+    </div>
+
+    <!-- Strategy Section -->
+    <section class="strategy-section" id="strategy">
+        <div class="left-content">
+            <h1 class="headline">We are the experts in quality business strategy</h1>
+            <div class="vertical-image-container">
+                <img src="https://images.unsplash.com/photo-1553644079-27f95c9a793e?auto=format&fit=crop&w=400&h=600" alt="Modern building staircase" class="vertical-image">
             </div>
-            <div class="card">
-                <img src="../images/pexels-anastasiya-gepp-654466-1462630.jpg" alt="Student in accommodation">
-                <div class="card-content">
-                    <h3>card to studying at university in Australia: your accommodation</h3>
-                    <p>From Monash in Melbourne to the University of Western Australia in Perth and QUT in Brisbane, Australia is a great place to study.</p>
-                    <a href="#">Read more →</a>
-                </div>
+        </div>
+        <div class="right-content">
+            <div class="square-image-container">
+                <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=600&h=400" alt="Modern architecture interior" class="square-image">
+            </div>
+            <p class="description">
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+            </p>
+            <a href="#" class="learn-more-btn">Learn More</a>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="statistics-section" id="statistics">
+        <div class="left-content">
+            <h1 class="headline">We are the best agency to improve your deals</h1>
+            <p class="subheading">We work directly for our clients and put client's interests first.</p>
+            <p class="description">
+                Everything that can be necessary to create and manage new projects (startups) in modern conditions. From development of concept, business plan and project management plan, to marketing strategy and tactics, as well as the system of customer attraction via the Internet and sales system.
+            </p>
+        </div>
+        <div class="right-content">
+            <div class="stat-box">
+                <div class="percentage" id="percentage1">0%</div>
+                <p class="stat-description">
+                    Client satisfaction rate based on our quality service and dedication to excellence.
+                </p>
+            </div>
+            <div class="stat-box">
+                <div class="percentage" id="percentage2">0%</div>
+                <p class="stat-description">
+                    Growth in property value after our strategic improvements and market positioning.
+                </p>
+            </div>
+            <div class="stat-box">
+                <div class="percentage" id="percentage3">0%</div>
+                <p class="stat-description">
+                    Faster sales process compared to market average through our optimized approach.
+                </p>
+            </div>
+            <div class="stat-box">
+                <div class="percentage" id="percentage4">0%</div>
+                <p class="stat-description">
+                    Reduction in vacancy rates for properties under our management services.
+                </p>
             </div>
         </div>
     </section>
-    <footer class="footer">
-        <div class="footer-links">
-            <div class="footer-column">
-                <a href="#">About us</a>
-                <a href="#">Contact us</a>
-            </div>
-            <div class="footer-column">
-                <a href="#">Student blog</a>
-                <a href="#">Student guides</a>
-                <a href="#">Universities</a>
-                <a href="#">Advertise</a>
-            </div>
-            <div class="footer-column">
-                <a href="#">Terms and Conditions</a>
-                <a href="#">Privacy Policy</a>
-            </div>
+
+    <!-- Photo Grid -->
+    <div class="photo-grid" id="gallery">
+        <div class="photo-item">
+            <img src="https://images.unsplash.com/photo-1519999482648-25049ddd37b1?auto=format&fit=crop&w=400&h=400" alt="Tall modern skyscrapers against blue sky">
         </div>
-        <div class="footer-right">
+        <div class="photo-item">
+            <img src="https://images.unsplash.com/photo-1495695911435-bf599e8efdce?auto=format&fit=crop&w=400&h=400" alt="Looking up at a textured glass building">
+        </div>
+        <div class="photo-item">
+            <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=400&h=400" alt="Modern building with geometric pattern">
+        </div>
+        <div class="photo-item">
+            <img src="https://images.unsplash.com/photo-1504615755583-2916b52192a3?auto=format&fit=crop&w=400&h=400" alt="Blue glass building with angular design">
+        </div>
+        <div class="photo-item">
+            <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=400&h=400" alt="Looking up at skyscrapers from below">
+        </div>
+        <div class="photo-item">
+            <img src="https://images.unsplash.com/photo-1523540383847-1669def43202?auto=format&fit=crop&w=400&h=400" alt="Curved lines of a modern building">
+        </div>
+        <div class="photo-item">
+            <img src="https://images.unsplash.com/photo-1503387837-b154d5074bd2?auto=format&fit=crop&w=400&h=400" alt="Tall cylindrical skyscraper against sky">
+        </div>
+        <div class="photo-item">
+            <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=400&h=400" alt="People walking through glass building interior">
+        </div>
+    </div>
+    
+    <div class="sample-text">
+        Our portfolio showcases the diverse range of architectural projects we've completed for our clients
+    </div>
+    
+    <div class="social-icons">
+        <a href="#" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="#" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+        </a>
+        <a href="#" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="container" id="contact">
+        <div class="contact-section">
+            <h2>Contact Us</h2>
+            <div class="address">
+                New York, 4140 Parker Rd.<br>
+                Allentown,<br>
+                New Mexico 31134
+            </div>
+            <div class="phone">+1 (555) 656 77 89</div>
+            <div class="email">info@homestead.com</div>
+            
             <div class="social-icons">
-                <i class="fa-brands fa-facebook"></i>
-                <i class="fa-brands fa-instagram"></i>
-                <i class="fa-brands fa-x-twitter"></i>
-                <i class="fa-brands fa-tiktok"></i>
-                <i class="fa-brands fa-youtube"></i>
+                <a href="#" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" aria-label="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
             </div>
         </div>
-    </footer>
+        
+        <div class="signup-section">
+            <h2>Sign me up!</h2>
+            <p class="signup-text">
+                Stay updated with our latest property listings, market insights, and exclusive offers. Join our newsletter to receive personalized real estate recommendations tailored to your preferences.
+            </p>
+            <div class="input-container">
+                <input type="text" placeholder="Enter your Name">
+                <button class="submit-btn">SUBMIT</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-text">
+            HOMESTEAD Real Estate Company - Your Trusted Partner in Real Estate<br>
+            Finding your dream home since 2010
+        </div>
+        
+        <div class="footer-links">
+            <span>© 2025 HOMESTEAD</span> created with <a href="#">Premium Design</a>.
+        </div>
+    </div>
+
+    <!-- Additional Sections -->
+    <div class="container">
+        <!-- Second Hero Section -->
+        <section class="section hero-section">
+            <div class="left-content">
+                <h1>We Elevate the Beauty of Your Home</h1>
+                <div class="subtitle">We created our own Digital Transformation Methodology</div>
+                <p>We want to understand who your clients are, how digital-savvy and engaged your employees are, what you are already doing to build a future-proof organisation and absorb anything you're willing to throw at us. To do this, we gather insights from your employees, we interview key stakeholders and thoroughly look into your organisation.</p>
+                <a href="#" class="chat-button">
+                    <span class="chat-icon"></span>
+                    Chat Now
+                </a>
+            </div>
+            
+            <div class="right-content">
+                <div class="building-top">
+                    <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=600&h=300" alt="Modern building view" class="building-img">
+                </div>
+                <div class="counter-card">
+                    <div class="counter" id="counter">0k</div>
+                </div>
+                <div class="building-bottom">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&h=300" alt="Modern building view" class="building-img">
+                </div>
+            </div>
+        </section>
+        
+        <!-- Product Description Section -->
+        <section class="section">
+            <div class="tabs">
+                <div class="tab">Description</div>
+                <div class="tab active">Specifications</div>
+                <div class="tab">Reviews</div>
+            </div>
+            
+            <div class="content-container">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=400&h=400" alt="Geometric design with triangular patterns" />
+                </div>
+                
+                <div class="description-container">
+                    <h2 class="description-title">Description</h2>
+                    
+                    <p class="sample-text">Sample text. Click to select the text box. Click again or double click to start editing the text. Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
+                    
+                    <ul class="bullet-list">
+                        <li>excepteur sint occaecat cupidatat non</li>
+                        <li>sunt in culpa qui officia deserunt</li>
+                        <li>ut enim ad minim veniam</li>
+                        <li>quis nostrud exercitation ullamco</li>
+                        <li>laboris nisi ut aliquip ex ea commodo</li>
+                        <li>duis aute irure dolor in reprehenderit in</li>
+                        <li>voluptate velit esse cillum dolore eu fugiat nulla pariatur.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Article Section -->
+        <section class="section">
+            <h1 class="headline">We dwelling elegance do shutters appetite yourself diverted</h1>
+            
+            <div class="article-content">
+                <div class="article-text">
+                    <p>Article evident arrived express highest men did boy. Mistress sensible entirely am so. Quick can manor smart money hopes worth too. Comfort produce husband boy her had hearing. Law others theirs passed but wishes. You day real less till dear read. Considered use dispatched melancholy sympathize discretion led. Oh feel if up to till like. He an thing rapid these after going drawn or.</p>
+                </div>
+                
+                <div class="faded-text">
+                    <p>Article evident arrived express highest men did boy. Mistress sensible entirely am so. Quick can manor smart money hopes worth too. Comfort produce husband boy her had hearing. Law others theirs passed but wishes. You day real less till dear read. Considered use dispatched melancholy sympathize discretion led.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Digital Marketing Services Section -->
+        <section class="section">
+            <h1 class="marketing-title">Customized Digital Marketing Service</h1>
+            
+            <div class="services-container">
+                <div class="service-card">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=400&h=250')"></div>
+                    <div class="service-label">For business owners</div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=400&h=250')"></div>
+                    <div class="service-label">For bloggers</div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Final Footer -->
+    <div class="footer">
+        Copyright © 2025 | All Rights Reserved
+    </div>
+
+    <script src="../js/home.js"></script>
 </body>
 </html>
