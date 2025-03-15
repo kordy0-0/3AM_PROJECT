@@ -1,125 +1,98 @@
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f4f4f4;
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-}
-.container {
-    display: flex;
-    background: white;
-    width: 900px; 
-    height: 550px; 
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
-    animation: fadeIn 0.7s ease-in-out;
-}
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-15px);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    
+    body {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #0280a0;
     }
-}
-.left-section {
-    width: 50%;
-    padding: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-.left-section h2 {
-    margin: 0;
-    font-size: 30px;
-    font-weight: bold;
-}
-.left-section p {
-    font-size: 16px;
-    color: #777;
-    margin-bottom: 25px;
-}
-form {
-    display: flex;
-    flex-direction: column;
-}
-label {
-    font-size: 14px;
-    font-weight: bold;
-    color: #666;
-    margin-top: 12px;
-}
-input {
-    padding: 14px;
-    font-size: 14px;
-    margin-top: 5px;
-    border: 1.5px solid #ccc;
-    border-radius: 6px;
-    transition: all 0.3s ease-in-out;
-}
-input:focus {
-    border-color: #8c7ae6;
-    box-shadow: 0 0 6px rgba(140, 122, 230, 0.5);
-    outline: none;
-}
-.forgot {
-    font-size: 14px;
-    text-align: right;
-    margin-top: 8px;
-    color: #8c7ae6;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-.forgot:hover {
-    color: #5a45c8;
-}
-.login {
-    margin-top: 15px;
-    padding: 14px;
-    background: #8c7ae6;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: all 0.3s ease-in-out;
-}
-.login:hover {
-    background: #5a45c8;
-    transform: scale(1.05);
-    box-shadow: 0 5px 12px rgba(90, 69, 200, 0.3);
-}
-.signup {
-    text-align: center;
-    margin-top: 10px;
-    font-size: 14px;
-}
-.signup a {
-    color: #8c7ae6;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-.signup a:hover {
-    color: #5a45c8;
-    font-weight: bold;
-    text-decoration: underline;
-}
-.right-section {
-    width: 50%;
-    position: relative;
-    overflow: hidden;
-}
-.right-section img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease-in-out;
-}
-.right-section img:hover {
-    transform: scale(1.05);
-}
+    
+    .login-container {
+      width: 100%;
+      max-width: 600px;
+      padding: 40px;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .login-title {
+      text-align: center;
+      font-size: 36px;
+      color: #555;
+      margin-bottom: 30px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+    
+      width: 100%;
+      padding: 15px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      color: #555;
+    }
+    
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    
+    .btn-login {
+      width: 100%;
+      padding: 15px;
+      background-color: #0280a0;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+    
+    .forgot-password, .sign-up {
+      text-align: center;
+    }
+    
+    a {
+      color: #0280a0;
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+      margin-bottom: 15px;
+    }

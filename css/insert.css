@@ -1,0 +1,133 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    padding: 20px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .form-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 1000px;
+  }
+  
+  h1 {
+    color: #2a7a6e;
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: normal;
+  }
+  
+  .form-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .form-group > div {
+    grid-column: span 1;
+  }
+  
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .required-label:after {
+    content: " (required)";
+    font-weight: normal;
+    color: #666;
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #f8f8f8;
+    font-size: 14px;
+  }
+  
+  input::placeholder {
+    color: #ccc;
+  }
+  
+  .adviser-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+  }
+  
+  .adviser-button {
+    background-color: #f8f8f8;
+    color: #333;
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .adviser-button.active {
+    background-color: #2a7a6e;
+    color: white;
+    border-color: #2a7a6e;
+  }
+  
+  .date-input {
+    position: relative;
+  }
+  
+  .date-input input {
+    padding-right: 35px;
+  }
+  
+  .date-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #2a7a6e;
+    pointer-events: none;
+  }
+  
+  .submit-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  button[type="submit"] {
+    background-color: #2a7a6e;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #236358;
+  }
