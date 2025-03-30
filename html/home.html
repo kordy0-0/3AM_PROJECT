@@ -1,281 +1,967 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>We Elevate the Beauty of Your Home</title>
-    <link rel="stylesheet" href="../css/home.css">
-    <!-- Adding Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Student Housing Rentals</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+:root {
+    --primary-color: #4361ee;
+    --secondary-color: #3f37c9;
+    --success-color: #4caf50;
+    --warning-color: #ff9800;
+    --light-color: #f8f9fa;
+    --dark-color: #212529;
+    --gray-color: #6c757d;
+    --gray-light-color: #e9ecef;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+}
+
+.btn-light {
+    background-color: white;
+    color: var(--dark-color);
+}
+
+.btn-light:hover {
+    background-color: #f1f1f1;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-outline-light {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+}
+
+.btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.bg-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.bg-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.bg-warning {
+    background-color: var(--warning-color);
+    color: var(--dark-color);
+}
+
+/* Navigation */
+.navbar {
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 1rem 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.navbar-toggler {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-item {
+    margin-left: 1.5rem;
+}
+
+.nav-link {
+    color: var(--dark-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--primary-color);
+}
+
+.nav-link.btn {
+    color: white;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 5rem 0;
+    text-align: center;
+}
+
+.hero-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-section .lead {
+    font-size: 1.25rem;
+    margin-bottom: 3rem;
+}
+
+.search-box {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.search-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.search-col {
+    flex: 1;
+    min-width: 200px;
+}
+
+.search-box select, .search-box button {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 4px;
+    border: none;
+}
+
+.search-box select {
+    background-color: white;
+}
+
+/* Properties Section */
+.properties-section {
+    padding: 5rem 0;
+}
+
+.property-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 3rem;
+}
+
+.property-card {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.property-card:hover {
+    transform: translateY(-5px);
+}
+
+.property-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.property-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.price {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.card-title {
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+}
+
+.location {
+    color: var(--gray-color);
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.property-features {
+    display: flex;
+    justify-content: space-between;
+    color: var(--gray-color);
+    font-size: 0.9rem;
+}
+
+/* Features Section */
+.features-section {
+    padding: 5rem 0;
+    background-color: var(--light-color);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.feature-item {
+    text-align: center;
+    padding: 2rem;
+}
+
+.feature-icon {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.feature-item h4 {
+    margin-bottom: 1rem;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    padding: 5rem 0;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.testimonial-card {
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.testimonial-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 1rem;
+    object-fit: cover;
+}
+
+.testimonial-header h5 {
+    margin-bottom: 0.25rem;
+}
+
+.testimonial-header small {
+    color: var(--gray-color);
+}
+
+/* Universities Section */
+.universities-section {
+    padding: 5rem 0;
+    background-color: var(--light-color);
+}
+
+.universities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 30px;
+}
+
+.university-item {
+    text-align: center;
+}
+
+.university-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+}
+
+/* CTA Section */
+.cta-section {
+    padding: 5rem 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+}
+
+.cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.cta-section .lead {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--dark-color);
+    color: white;
+    padding: 5rem 0 2rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 3rem;
+}
+
+.footer-col h4, .footer-col h5 {
+    margin-bottom: 1.5rem;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.social-icons a:hover {
+    background-color: var(--primary-color);
+}
+
+.footer-links li, .contact-info li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+.contact-info li {
+    display: flex;
+    align-items: center;
+}
+
+.contact-info i {
+    margin-right: 0.75rem;
+    width: 20px;
+}
+
+.support-btn {
+    margin-top: 1.5rem;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 2rem 0;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-legal {
+    display: flex;
+    gap: 1.5rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .navbar-toggler {
+        display: block;
+    }
+    
+    .navbar-menu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background-color: white;
+        padding: 1rem;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        display: none;
+    }
+    
+    .navbar-menu.active {
+        display: block;
+    }
+    
+    .navbar-nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .nav-item {
+        margin: 0.5rem 0;
+        width: 100%;
+    }
+    
+    .nav-link.btn {
+        display: block;
+        text-align: center;
+        margin-top: 1rem;
+    }
+    
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .search-row {
+        flex-direction: column;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-legal {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .property-grid, .features-grid, .testimonial-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .universities-grid {  .testimonial-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .universities-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-buttons .btn {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .universities-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-title {
+        font-size: 1.75rem;
+    }
+}
+    </style>
+
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar" id="navbar">
-        <div class="logo">HOMESTEAD</div>
-        <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#strategy">Strategy</a>
-            <a href="#statistics">Statistics</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#contact">Contact</a>
+   
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#">StudentHomes</a>
+            <button class="navbar-toggler" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="navbar-menu" id="navbarMenu">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../html/home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../html/rent.html">Properties</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../html/rent.html">Universities</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../html/about us.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../html/contact us .html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary" href="../html/login.html">Sign In</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="menu-icon">&#9776;</div>
     </nav>
 
     <!-- Hero Section -->
-    <div class="hero" id="home">
-        <div class="hero-content">
-            <h1>Rent your home.<br>Own your life.<br>Start of something great.</h1>
-            <p>We combine expertise across disciplines, locations, and sectors. The practice is an active thought leader in social practice, developing award-winning architectural projects and urban strategies at a variety of scales.</p>
-            <a href="#contact" class="book-btn">BOOK NOW</a>
-        </div>
-    </div>
-
-    <!-- Strategy Section -->
-    <section class="strategy-section" id="strategy">
-        <div class="left-content">
-            <h1 class="headline">We are the experts in quality business strategy</h1>
-            <div class="vertical-image-container">
-                <img src="https://images.unsplash.com/photo-1553644079-27f95c9a793e?auto=format&fit=crop&w=400&h=600" alt="Modern building staircase" class="vertical-image">
-            </div>
-        </div>
-        <div class="right-content">
-            <div class="square-image-container">
-                <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=600&h=400" alt="Modern architecture interior" class="square-image">
-            </div>
-            <p class="description">
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-            </p>
-            <a href="#" class="learn-more-btn">Learn More</a>
-        </div>
-    </section>
-
-    <!-- Statistics Section -->
-    <section class="statistics-section" id="statistics">
-        <div class="left-content">
-            <h1 class="headline">We are the best agency to improve your deals</h1>
-            <p class="subheading">We work directly for our clients and put client's interests first.</p>
-            <p class="description">
-                Everything that can be necessary to create and manage new projects (startups) in modern conditions. From development of concept, business plan and project management plan, to marketing strategy and tactics, as well as the system of customer attraction via the Internet and sales system.
-            </p>
-        </div>
-        <div class="right-content">
-            <div class="stat-box">
-                <div class="percentage" id="percentage1">0%</div>
-                <p class="stat-description">
-                    Client satisfaction rate based on our quality service and dedication to excellence.
-                </p>
-            </div>
-            <div class="stat-box">
-                <div class="percentage" id="percentage2">0%</div>
-                <p class="stat-description">
-                    Growth in property value after our strategic improvements and market positioning.
-                </p>
-            </div>
-            <div class="stat-box">
-                <div class="percentage" id="percentage3">0%</div>
-                <p class="stat-description">
-                    Faster sales process compared to market average through our optimized approach.
-                </p>
-            </div>
-            <div class="stat-box">
-                <div class="percentage" id="percentage4">0%</div>
-                <p class="stat-description">
-                    Reduction in vacancy rates for properties under our management services.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Photo Grid -->
-    <div class="photo-grid" id="gallery">
-        <div class="photo-item">
-            <img src="https://images.unsplash.com/photo-1519999482648-25049ddd37b1?auto=format&fit=crop&w=400&h=400" alt="Tall modern skyscrapers against blue sky">
-        </div>
-        <div class="photo-item">
-            <img src="https://images.unsplash.com/photo-1495695911435-bf599e8efdce?auto=format&fit=crop&w=400&h=400" alt="Looking up at a textured glass building">
-        </div>
-        <div class="photo-item">
-            <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=400&h=400" alt="Modern building with geometric pattern">
-        </div>
-        <div class="photo-item">
-            <img src="https://images.unsplash.com/photo-1504615755583-2916b52192a3?auto=format&fit=crop&w=400&h=400" alt="Blue glass building with angular design">
-        </div>
-        <div class="photo-item">
-            <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=400&h=400" alt="Looking up at skyscrapers from below">
-        </div>
-        <div class="photo-item">
-            <img src="https://images.unsplash.com/photo-1523540383847-1669def43202?auto=format&fit=crop&w=400&h=400" alt="Curved lines of a modern building">
-        </div>
-        <div class="photo-item">
-            <img src="https://images.unsplash.com/photo-1503387837-b154d5074bd2?auto=format&fit=crop&w=400&h=400" alt="Tall cylindrical skyscraper against sky">
-        </div>
-        <div class="photo-item">
-            <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=400&h=400" alt="People walking through glass building interior">
-        </div>
-    </div>
-    
-    <div class="sample-text">
-        Our portfolio showcases the diverse range of architectural projects we've completed for our clients
-    </div>
-    
-    <div class="social-icons">
-        <a href="#" aria-label="Facebook">
-            <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="#" aria-label="Twitter">
-            <i class="fab fa-twitter"></i>
-        </a>
-        <a href="#" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-        </a>
-    </div>
-
-    <!-- Contact Section -->
-    <div class="container" id="contact">
-        <div class="contact-section">
-            <h2>Contact Us</h2>
-            <div class="address">
-                New York, 4140 Parker Rd.<br>
-                Allentown,<br>
-                New Mexico 31134
-            </div>
-            <div class="phone">+1 (555) 656 77 89</div>
-            <div class="email">info@homestead.com</div>
+    <section class="hero-section">
+        <div class="container">
+            <h1>Find Your Perfect Student Accommodation</h1>
+            <p class="lead">Thousands of verified properties near top universities</p>
             
-            <div class="social-icons">
-                <a href="#" aria-label="Facebook">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" aria-label="Twitter">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="#" aria-label="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
+            <div class="search-box">
+                <form id="search-form">
+                    <div class="search-row">
+                        <div class="search-col">
+                            <select id="university">
+                                <option selected>Select University</option>
+                                <option>University A</option>
+                                <option>University B</option>
+                                <option>University C</option>
+                                <option>University D</option>
+                            </select>
+                        </div>
+                        <div class="search-col">
+                            <select id="property-type">
+                                <option selected>Property Type</option>
+                                <option>Shared Apartment</option>
+                                <option>Studio</option>
+                                <option>Private Room</option>
+                                <option>Dormitory</option>
+                            </select>
+                        </div>
+                        <div class="search-col">
+                            <select id="budget">
+                                <option selected>Budget</option>
+                                <option>$300 - $500</option>
+                                <option>$500 - $700</option>
+                                <option>$700 - $900</option>
+                                <option>$900+</option>
+                            </select>
+                        </div>
+                        <div class="search-col">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-        
-        <div class="signup-section">
-            <h2>Sign me up!</h2>
-            <p class="signup-text">
-                Stay updated with our latest property listings, market insights, and exclusive offers. Join our newsletter to receive personalized real estate recommendations tailored to your preferences.
-            </p>
-            <div class="input-container">
-                <input type="text" placeholder="Enter your Name">
-                <button class="submit-btn">SUBMIT</button>
+    </section>
+
+    <!-- Featured Properties -->
+    <section class="properties-section">
+        <div class="container">
+            <h2 class="section-title">Featured Student Properties</h2>
+            <div class="property-grid">
+                <!-- Property 1 -->
+                 <a href="../html/details.html">
+                <div class="property-card">
+                    <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80');"></div>
+                    <div class="card-body">
+                        <div class="property-meta">
+                            <span class="badge bg-primary">Shared Apartment</span>
+                            <span class="price">$450/month</span>
+                        </div>
+                        <h5 class="card-title">Sunny Campus Apartment</h5>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> 0.5 miles from University A</p>
+                        <div class="property-features">
+                            <span><i class="fas fa-bed"></i> 3 Beds</span>
+                            <span><i class="fas fa-bath"></i> 2 Baths</span>
+                            <span><i class="fas fa-wifi"></i> Free WiFi</span>
+                        </div>
+                    </div>
+                </div>
+                </a>
+                <!-- Property 2 -->
+                 <a href="../html/details.html">
+                <div class="property-card">
+                    <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80');"></div>
+                    <div class="card-body">
+                        <div class="property-meta">
+                            <span class="badge bg-success">Studio</span>
+                            <span class="price">$550/month</span>
+                        </div>
+                        <h5 class="card-title">Modern Student Studio</h5>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> 0.3 miles from University B</p>
+                        <div class="property-features">
+                            <span><i class="fas fa-bed"></i> 1 Bed</span>
+                            <span><i class="fas fa-bath"></i> 1 Bath</span>
+                            <span><i class="fas fa-utensils"></i> Kitchen</span>
+                        </div>
+                    </div>
+                </div>
+                </a>
+                <!-- Property 3 -->
+                 <a href="../html/details.html">
+                <div class="property-card">
+                    <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80');"></div>
+                    <div class="card-body">
+                        <div class="property-meta">
+                            <span class="badge bg-warning">Private Room</span>
+                            <span class="price">$380/month</span>
+                        </div>
+                        <h5 class="card-title">Cozy Campus Room</h5>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> 0.7 miles from University C</p>
+                        <div class="property-features">
+                            <span><i class="fas fa-bed"></i> 1 Bed</span>
+                            <span><i class="fas fa-users"></i> 3 Roommates</span>
+                            <span><i class="fas fa-parking"></i> Parking</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            </div>
+            
+            <div class="text-center">
+                <a href="../html/rent.html" class="btn btn-outline">View All Properties</a>
             </div>
         </div>
-    </div>
-    
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose StudentHomes</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h4>Verified Properties</h4>
+                    <p>All our listings are verified to ensure quality and safety standards for students.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h4>Close to Campus</h4>
+                    <p>Find accommodations within walking distance to your university or college.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h4>Student-Friendly Prices</h4>
+                    <p>Affordable options that fit student budgets with no hidden fees.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">What Students Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="testimonial-img" alt="Student">
+                        <div>
+                            <h5>Sarah Johnson</h5>
+                            <small>University A</small>
+                        </div>
+                    </div>
+                    <p>"Found my perfect apartment through StudentHomes. The process was smooth and the support team was very helpful!"</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="testimonial-img" alt="Student">
+                        <div>
+                            <h5>Michael Chen</h5>
+                            <small>University B</small>
+                        </div>
+                    </div>
+                    <p>"As an international student, finding accommodation was my biggest worry. StudentHomes made it easy and stress-free."</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" class="testimonial-img" alt="Student">
+                        <div>
+                            <h5>Emma Rodriguez</h5>
+                            <small>University C</small>
+                        </div>
+                    </div>
+                    <p>"The verified listings gave me peace of mind. I found roommates and a great apartment all in one place!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Universities We Serve -->
+    <section class="universities-section">
+        <div class="container">
+            <h2 class="section-title">Universities We Serve</h2>
+            <div class="universities-grid">
+                <div class="university-item">
+                    <img src="https://via.placeholder.com/150" class="university-logo" alt="University Logo">
+                    <h6>University A</h6>
+                </div>
+                <div class="university-item">
+                    <img src="https://via.placeholder.com/150" class="university-logo" alt="University Logo">
+                    <h6>University B</h6>
+                </div>
+                <div class="university-item">
+                    <img src="https://via.placeholder.com/150" class="university-logo" alt="University Logo">
+                    <h6>University C</h6>
+                </div>
+                <div class="university-item">
+                    <img src="https://via.placeholder.com/150" class="university-logo" alt="University Logo">
+                    <h6>University D</h6>
+                </div>
+                <div class="university-item">
+                    <img src="https://via.placeholder.com/150" class="university-logo" alt="University Logo">
+                    <h6>University E</h6>
+                </div>
+                <div class="university-item">
+                    <img src="https://via.placeholder.com/150" class="university-logo" alt="University Logo">
+                    <h6>University F</h6>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Find Your Student Home?</h2>
+            <p class="lead">Join thousands of students who found their perfect accommodation with us</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-light">Browse Properties</a>
+                <a href="#" class="btn btn-outline-light">List Your Property</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
-    <div class="footer">
-        <div class="footer-text">
-            HOMESTEAD Real Estate Company - Your Trusted Partner in Real Estate<br>
-            Finding your dream home since 2010
-        </div>
-        
-        <div class="footer-links">
-            <span>© 2025 HOMESTEAD</span> created with <a href="#">Premium Design</a>.
-        </div>
-    </div>
-
-    <!-- Additional Sections -->
-    <div class="container">
-        <!-- Second Hero Section -->
-        <section class="section hero-section">
-            <div class="left-content">
-                <h1>We Elevate the Beauty of Your Home</h1>
-                <div class="subtitle">We created our own Digital Transformation Methodology</div>
-                <p>We want to understand who your clients are, how digital-savvy and engaged your employees are, what you are already doing to build a future-proof organisation and absorb anything you're willing to throw at us. To do this, we gather insights from your employees, we interview key stakeholders and thoroughly look into your organisation.</p>
-                <a href="#" class="chat-button">
-                    <span class="chat-icon"></span>
-                    Chat Now
-                </a>
-            </div>
-            
-            <div class="right-content">
-                <div class="building-top">
-                    <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=600&h=300" alt="Modern building view" class="building-img">
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>StudentHomes</h4>
+                    <p>The leading platform for student housing rentals. We connect students with quality accommodations near their universities.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
                 </div>
-                <div class="counter-card">
-                    <div class="counter" id="counter">0k</div>
-                </div>
-                <div class="building-bottom">
-                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&h=300" alt="Modern building view" class="building-img">
-                </div>
-            </div>
-        </section>
-        
-        <!-- Product Description Section -->
-        <section class="section">
-            <div class="tabs">
-                <div class="tab">Description</div>
-                <div class="tab active">Specifications</div>
-                <div class="tab">Reviews</div>
-            </div>
-            
-            <div class="content-container">
-                <div class="image-container">
-                    <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=400&h=400" alt="Geometric design with triangular patterns" />
-                </div>
-                
-                <div class="description-container">
-                    <h2 class="description-title">Description</h2>
-                    
-                    <p class="sample-text">Sample text. Click to select the text box. Click again or double click to start editing the text. Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
-                    
-                    <ul class="bullet-list">
-                        <li>excepteur sint occaecat cupidatat non</li>
-                        <li>sunt in culpa qui officia deserunt</li>
-                        <li>ut enim ad minim veniam</li>
-                        <li>quis nostrud exercitation ullamco</li>
-                        <li>laboris nisi ut aliquip ex ea commodo</li>
-                        <li>duis aute irure dolor in reprehenderit in</li>
-                        <li>voluptate velit esse cillum dolore eu fugiat nulla pariatur.</li>
+                <div class="footer-col">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Properties</a></li>
+                        <li><a href="#">Universities</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
                     </ul>
                 </div>
-            </div>
-        </section>
-        
-        <!-- Article Section -->
-        <section class="section">
-            <h1 class="headline">We dwelling elegance do shutters appetite yourself diverted</h1>
-            
-            <div class="article-content">
-                <div class="article-text">
-                    <p>Article evident arrived express highest men did boy. Mistress sensible entirely am so. Quick can manor smart money hopes worth too. Comfort produce husband boy her had hearing. Law others theirs passed but wishes. You day real less till dear read. Considered use dispatched melancholy sympathize discretion led. Oh feel if up to till like. He an thing rapid these after going drawn or.</p>
+                <div class="footer-col">
+                    <h5>For Students</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">How It Works</a></li>
+                        <li><a href="#">Student Resources</a></li>
+                        <li><a href="#">Roommate Finder</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Student Blog</a></li>
+                    </ul>
                 </div>
-                
-                <div class="faded-text">
-                    <p>Article evident arrived express highest men did boy. Mistress sensible entirely am so. Quick can manor smart money hopes worth too. Comfort produce husband boy her had hearing. Law others theirs passed but wishes. You day real less till dear read. Considered use dispatched melancholy sympathize discretion led.</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Digital Marketing Services Section -->
-        <section class="section">
-            <h1 class="marketing-title">Customized Digital Marketing Service</h1>
-            
-            <div class="services-container">
-                <div class="service-card">
-                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=400&h=250')"></div>
-                    <div class="service-label">For business owners</div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=400&h=250')"></div>
-                    <div class="service-label">For bloggers</div>
+                <div class="footer-col">
+                    <h5>Contact Us</h5>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 University Ave, City</li>
+                        <li><i class="fas fa-phone"></i> (123) 456-7890</li>
+                        <li><i class="fas fa-envelope"></i> info@studenthomes.com</li>
+                    </ul>
+                    <div class="support-btn">
+                        <a href="#" class="btn btn-outline-light">Support</a>
+                    </div>
                 </div>
             </div>
-        </section>
-    </div>
-    
-    <!-- Final Footer -->
-    <div class="footer">
-        Copyright © 2025 | All Rights Reserved
-    </div>
+            <hr>
+            <div class="footer-bottom">
+                <p>© 2023 StudentHomes. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-    <script src="../js/home.js"></script>
+     <script>
+        // Mobile menu toggle
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const navbarMenu = document.getElementById('navbarMenu');
+    
+    menuToggle.addEventListener('click', function() {
+        navbarMenu.classList.toggle('active');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!navbarMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+            navbarMenu.classList.remove('active');
+        }
+    });
+    
+    // Search form submission
+    const searchForm = document.getElementById('search-form');
+    if (searchForm) {
+        searchForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const university = document.getElementById('university').value;
+            const propertyType = document.getElementById('property-type').value;
+            const budget = document.getElementById('budget').value;
+            
+            // You can implement search functionality here
+            console.log('Search parameters:', {
+                university,
+                propertyType,
+                budget
+            });
+            
+            alert('Search submitted! University: ' + university + ', Property Type: ' + propertyType + ', Budget: ' + budget);
+        });
+    }
+    
+    // Add smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+});
+    </script>
 </body>
 </html>

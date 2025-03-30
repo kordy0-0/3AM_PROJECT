@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Housing Platform - Profile</title>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Base Styles */
+    :root {
+      --primary-color: #3b82f6;
+      --primary-hover: #2563eb;
+      --secondary-color: #f3f4f6;
+      --text-color: #1f2937;
+      --text-muted: #6b7280;
+      --border-color: #e5e7eb;
+      --card-bg: #ffffff;
+      --success-color: #10b981;
+      --neutral-color: #9ca3af;
+      --danger-color: #ef4444;
+      --radius: 0.5rem;
+      --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9fafb;
+      color: var(--text-color);
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    /* Grid Layout */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .profile-grid {
+        grid-template-columns: 1fr 3fr;
+      }
+    }
+
+    /* Card Styles */
+    .card {
+      background-color: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    .card-header {
+      padding: 1.25rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .card-content {
+      padding: 1.25rem;
+    }
+
+    .card-footer {
+      padding: 1rem 1.25rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* Profile Info */
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .user-details {
+      margin-bottom: 0.5rem;
+    }
+
+    .location {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    /* Navigation */
+    .side-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      border: none;
+      background: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      font-size: 1rem;
+      color: var(--text-color);
+      transition: background-color 0.2s;
+    }
+
+    .nav-btn:hover {
+      background-color: var(--secondary-color);
+    }
+
+    /* Tabs */
+    .tabs-list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 1.5rem;
+    }
+
+    .tab-btn {
+      padding: 0.75rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text-color);
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover {
+      color: var(--primary-color);
+    }
+
+    .tab-btn.active {
+      color: var(--primary-color);
+      border-bottom-color: var(--primary-color);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Section Title */
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Apartments Grid */
+    .apartments-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .apartments-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .apartments-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* Apartment Card */
+    .apartment-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .apartment-image {
+      position: relative;
+      height: 200px;
+    }
+
+    .apartment-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .favorite-btn {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background-color: rgba(255, 255, 255, 0.8);
+      border: none;
+      border-radius: 50%;
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--danger-color);
+    }
+
+    .apartment-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .apartment-location, .apartment-details {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .apartment-details {
+      justify-content: space-between;
+    }
+
+    .apartment-features {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .price {
+      font-weight: bold;
+      color: var(--text-color);
+    }
+
+    /* Bookings */
+    .bookings-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .booking-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .booking-grid {
+        grid-template-columns: 1fr 2fr;
+      }
+    }
+
+    .booking-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--radius);
+    }
+
+    .booking-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .booking-location, .booking-date {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .booking-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Form Styles */
+    .settings-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .form-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-section h3 {
+      margin-bottom: 1rem;
+      font-size: 1.125rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      font-size: 1rem;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .form-actions {
+      margin-top: 1rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--secondary-color);
+    }
+
+    .btn-sm {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    .btn-full {
+      width: 100%;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .badge-success {
+      background-color: var(--success-color);
+    }
+
+    .badge-neutral {
+      background-color: var(--neutral-color);
+    }
+
+    /* Utilities */
+    .text-muted {
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="profile-grid">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="card">
+          <div class="card-content">
+            <div class="profile-info">
+              <div class="avatar">
+                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="User profile">
+              </div>
+              <div class="user-details">
+                <h2>Ahmed Mohamed</h2>
+                <p class="text-muted">Student at Cairo University</p>
+              </div>
+              <div class="location">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Cairo, Egypt</span>
+              </div>
+              <button class="btn btn-primary btn-full">Edit Profile</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-content">
+            <nav class="side-nav">
+              <button class="nav-btn">
+                <i class="fas fa-user"></i>
+                Profile
+              </button>
+              <button class="nav-btn">
+                <i class="fas fa-bookmark"></i>
+                Saved Apartments
+              </button>
+              <button class="nav-btn">
+                <i class="fas fa-calendar"></i>
+                Bookings
+              </button>
+              <button class="nav-btn">
+                <i class="fas fa-cog"></i>
+                Settings
+              </button>
+            </nav>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Main Content -->
+      <div class="main-content">
+        <div class="tabs">
+          <div class="tabs-list">
+            <button class="tab-btn active" data-tab="saved">Saved</button>
+            <button class="tab-btn" data-tab="bookings">Bookings</button>
+            <button class="tab-btn" data-tab="history">History</button>
+            <button class="tab-btn" data-tab="settings">Settings</button>
+          </div>
+          
+          <!-- Saved Apartments Tab -->
+          <div class="tab-content active" id="saved">
+            <h2 class="section-title">Saved Apartments</h2>
+            <div class="apartments-grid">
+              <!-- Apartment Card 1 -->
+              <div class="card apartment-card">
+                <div class="apartment-image">
+                  <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Apartment 1">
+                  <button class="favorite-btn">
+                    <i class="fas fa-heart"></i>
+                  </button>
+                </div>
+                <div class="card-content">
+                  <div class="apartment-header">
+                    <h3>Premium Student Apartment</h3>
+                    <span class="badge">Available</span>
+                  </div>
+                  <div class="apartment-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Maadi, Cairo</span>
+                  </div>
+                  <div class="apartment-details">
+                    <div class="apartment-features">
+                      <i class="fas fa-home"></i>
+                      <span>2 Bedrooms, 1 Bath</span>
+                    </div>
+                    <p class="price">1200 EGP/month</p>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-primary btn-full">View Details</button>
+                </div>
+              </div>
+              
+              <!-- Apartment Card 2 -->
+              <div class="card apartment-card">
+                <div class="apartment-image">
+                  <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Apartment 2">
+                  <button class="favorite-btn">
+                    <i class="fas fa-heart"></i>
+                  </button>
+                </div>
+                <div class="card-content">
+                  <div class="apartment-header">
+                    <h3>Near University Apartment</h3>
+                    <span class="badge">Available</span>
+                  </div>
+                  <div class="apartment-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Giza, Cairo</span>
+                  </div>
+                  <div class="apartment-details">
+                    <div class="apartment-features">
+                      <i class="fas fa-home"></i>
+                      <span>1 Bedroom, 1 Bath</span>
+                    </div>
+                    <p class="price">900 EGP/month</p>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-primary btn-full">View Details</button>
+                </div>
+              </div>
+              
+              <!-- Apartment Card 3 -->
+              <div class="card apartment-card">
+                <div class="apartment-image">
+                  <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Apartment 3">
+                  <button class="favorite-btn">
+                    <i class="fas fa-heart"></i>
+                  </button>
+                </div>
+                <div class="card-content">
+                  <div class="apartment-header">
+                    <h3>Luxury Studio</h3>
+                    <span class="badge">Available</span>
+                  </div>
+                  <div class="apartment-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Nasr City, Cairo</span>
+                  </div>
+                  <div class="apartment-details">
+                    <div class="apartment-features">
+                      <i class="fas fa-home"></i>
+                      <span>Studio, 1 Bath</span>
+                    </div>
+                    <p class="price">1100 EGP/month</p>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-primary btn-full">View Details</button>
+                </div>
+              </div>
+              
+              <!-- Apartment Card 4 -->
+              <div class="card apartment-card">
+                <div class="apartment-image">
+                  <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Apartment 4">
+                  <button class="favorite-btn">
+                    <i class="fas fa-heart"></i>
+                  </button>
+                </div>
+                <div class="card-content">
+                  <div class="apartment-header">
+                    <h3>Shared Student Apartment</h3>
+                    <span class="badge">Available</span>
+                  </div>
+                  <div class="apartment-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Dokki, Cairo</span>
+                  </div>
+                  <div class="apartment-details">
+                    <div class="apartment-features">
+                      <i class="fas fa-home"></i>
+                      <span>3 Bedrooms, 2 Baths</span>
+                    </div>
+                    <p class="price">800 EGP/month</p>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-primary btn-full">View Details</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Bookings Tab -->
+          <div class="tab-content" id="bookings">
+            <div class="card">
+              <div class="card-header">
+                <h2>Current Bookings</h2>
+                <p class="text-muted">Manage your apartment bookings</p>
+              </div>
+              <div class="card-content">
+                <div class="bookings-list">
+                  <!-- Booking 1 -->
+                  <div class="card booking-card">
+                    <div class="booking-content">
+                      <div class="booking-grid">
+                        <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Booking 1" class="booking-image">
+                        <div class="booking-details">
+                          <div class="booking-header">
+                            <h3>Luxury Student Apartment</h3>
+                            <span class="badge badge-success">Confirmed</span>
+                          </div>
+                          <div class="booking-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Dokki, Cairo</span>
+                          </div>
+                          <div class="booking-date">
+                            <i class="fas fa-calendar"></i>
+                            <span>September 1, 2023 - August 31, 2024</span>
+                          </div>
+                          <p class="price">1500 EGP/month</p>
+                          <div class="booking-actions">
+                            <button class="btn btn-sm btn-primary">Booking Details</button>
+                            <button class="btn btn-sm btn-outline">Cancel Booking</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Booking 2 -->
+                  <div class="card booking-card">
+                    <div class="booking-content">
+                      <div class="booking-grid">
+                        <img src="https://images.unsplash.com/photo-1536376072261-38c75010e6c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Booking 2" class="booking-image">
+                        <div class="booking-details">
+                          <div class="booking-header">
+                            <h3>Studio Near University</h3>
+                            <span class="badge badge-success">Confirmed</span>
+                          </div>
+                          <div class="booking-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Giza, Cairo</span>
+                          </div>
+                          <div class="booking-date">
+                            <i class="fas fa-calendar"></i>
+                            <span>October 1, 2023 - September 30, 2024</span>
+                          </div>
+                          <p class="price">1200 EGP/month</p>
+                          <div class="booking-actions">
+                            <button class="btn btn-sm btn-primary">Booking Details</button>
+                            <button class="btn btn-sm btn-outline">Cancel Booking</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- History Tab -->
+          <div class="tab-content" id="history">
+            <div class="card">
+              <div class="card-header">
+                <h2>Booking History</h2>
+                <p class="text-muted">Your previous bookings</p>
+              </div>
+              <div class="card-content">
+                <div class="bookings-list">
+                  <!-- History 1 -->
+                  <div class="card booking-card">
+                    <div class="booking-content">
+                      <div class="booking-grid">
+                        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="History 1" class="booking-image">
+                        <div class="booking-details">
+                          <div class="booking-header">
+                            <h3>Student Apartment</h3>
+                            <span class="badge badge-neutral">Expired</span>
+                          </div>
+                          <div class="booking-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Giza, Cairo</span>
+                          </div>
+                          <div class="booking-date">
+                            <i class="fas fa-calendar"></i>
+                            <span>September 1, 2022 - August 31, 2023</span>
+                          </div>
+                          <p class="price">1300 EGP/month</p>
+                          <button class="btn btn-sm btn-primary">View Details</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- History 2 -->
+                  <div class="card booking-card">
+                    <div class="booking-content">
+                      <div class="booking-grid">
+                        <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="History 2" class="booking-image">
+                        <div class="booking-details">
+                          <div class="booking-header">
+                            <h3>Student Studio</h3>
+                            <span class="badge badge-neutral">Expired</span>
+                          </div>
+                          <div class="booking-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Nasr City, Cairo</span>
+                          </div>
+                          <div class="booking-date">
+                            <i class="fas fa-calendar"></i>
+                            <span>September 1, 2021 - August 31, 2022</span>
+                          </div>
+                          <p class="price">1100 EGP/month</p>
+                          <button class="btn btn-sm btn-primary">View Details</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- History 3 -->
+                  <div class="card booking-card">
+                    <div class="booking-content">
+                      <div class="booking-grid">
+                        <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="History 3" class="booking-image">
+                        <div class="booking-details">
+                          <div class="booking-header">
+                            <h3>Shared Room</h3>
+                            <span class="badge badge-neutral">Expired</span>
+                          </div>
+                          <div class="booking-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Dokki, Cairo</span>
+                          </div>
+                          <div class="booking-date">
+                            <i class="fas fa-calendar"></i>
+                            <span>September 1, 2020 - August 31, 2021</span>
+                          </div>
+                          <p class="price">800 EGP/month</p>
+                          <button class="btn btn-sm btn-primary">View Details</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Settings Tab -->
+          <div class="tab-content" id="settings">
+            <div class="card">
+              <div class="card-header">
+                <h2>Account Settings</h2>
+                <p class="text-muted">Manage your account settings and preferences</p>
+              </div>
+              <div class="card-content">
+                <form class="settings-form">
+                  <div class="form-section">
+                    <h3>Personal Information</h3>
+                    <div class="form-grid">
+                      <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" value="Ahmed" class="form-control">
+                      </div>
+                      <div class="form-group">  class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" value="Mohamed" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" value="ahmed@example.com" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" value="01xxxxxxxx" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="form-section">
+                    <h3>Notification Preferences</h3>
+                    <div class="form-group checkbox-group">
+                      <div class="checkbox-item">
+                        <input type="checkbox" id="emailNotifications" checked>
+                        <label for="emailNotifications">Email Notifications</label>
+                      </div>
+                      <div class="checkbox-item">
+                        <input type="checkbox" id="smsNotifications" checked>
+                        <label for="smsNotifications">SMS Notifications</label>
+                      </div>
+                      <div class="checkbox-item">
+                        <input type="checkbox" id="newListings" checked>
+                        <label for="newListings">New Apartment Listings</label>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Tab functionality
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      const tabContents = document.querySelectorAll('.tab-content');
+      
+      tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // Remove active class from all buttons and contents
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          tabContents.forEach(content => content.classList.remove('active'));
+          
+          // Add active class to clicked button and corresponding content
+          button.classList.add('active');
+          const tabId = button.getAttribute('data-tab');
+          document.getElementById(tabId).classList.add('active');
+        });
+      });
+      
+      // Favorite button functionality
+      const favoriteButtons = document.querySelectorAll('.favorite-btn');
+      
+      favoriteButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const icon = button.querySelector('i');
+          
+          // Toggle heart icon fill state
+          if (icon.classList.contains('fas')) {
+            icon.classList.remove('fas');
+            icon.classList.add('far');
+          } else {
+            icon.classList.remove('far');
+            icon.classList.add('fas');
+          }
+        });
+      });
+      
+      // Form submission
+      const settingsForm = document.querySelector('.settings-form');
+      
+      if (settingsForm) {
+        settingsForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          // Get form data
+          const formData = {
+            firstName: document.getElementById('firstName').value,
+            lastName: document.getElementById('lastName').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            emailNotifications: document.getElementById('emailNotifications').checked,
+            smsNotifications: document.getElementById('smsNotifications').checked,
+            newListings: document.getElementById('newListings').checked
+          };
+          
+          // Here you would typically send this data to your server
+          console.log('Form submitted with data:', formData);
+          
+          // Show success message
+          alert('Changes saved successfully!');
+        });
+      }
+      
+      // Side navigation functionality
+      const navButtons = document.querySelectorAll('.nav-btn');
+      
+      navButtons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+          // Activate corresponding tab
+          tabButtons[index].click();
+        });
+      });
+    });
+  </script>
+</body>
+</html>
