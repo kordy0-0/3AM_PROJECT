@@ -616,209 +616,859 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
+        /* Loading Screen Styles */
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --primary-light: #a0cfff;
+            --secondary: #e74c3c;
+            --secondary-light: #ff7b6b;
+            --accent: #f1c40f;
+            --accent-light: #ffe97f;
+            --dark: #2c3e50;
+            --dark-light: #34495e;
+            --light: #ecf0f1;
+            --light-dark: #bdc3c7;
+            --success: #2ecc71;
+            --purple: #9b59b6;
+            --teal: #1abc9c;
+            --gradient-start: #6a11cb;
+            --gradient-end: #2575fc;
+            --window-glow: rgba(255, 235, 59, 0.7);
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-medium: rgba(0, 0, 0, 0.2);
+            --shadow-dark: rgba(0, 0, 0, 0.3);
+        }
+
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        /* City Scene */
+        .city-scene {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 250px;
+            margin-bottom: 25px;
+        }
+
+        .skyline {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        /* Sun Animation */
+        .sun {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 30px var(--accent);
+            animation: sunPulse 1s infinite alternate, sunRise 0.4s forwards;
+            opacity: 0;
+        }
+
+        @keyframes sunPulse {
+            0% { box-shadow: 0 0 30px var(--accent); }
+            100% { box-shadow: 0 0 50px var(--accent); }
+        }
+
+        @keyframes sunRise {
+            0% { transform: translateX(-50%) translateY(50px); opacity: 0; }
+            100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+
+        /* Clouds */
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+            opacity: 0;
+            animation: fadeIn 0.3s forwards;
+        }
+
+        .cloud:before, .cloud:after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+        }
+
+        .cloud-1 {
+            width: 100px;
+            height: 30px;
+            top: 40px;
+            left: 10%;
+            animation: cloudMove 15s linear infinite, fadeIn 0.3s forwards 0.1s;
+        }
+
+        .cloud-1:before {
+            width: 40px;
+            height: 40px;
+            top: -20px;
+            left: 15px;
+        }
+
+        .cloud-1:after {
+            width: 30px;
+            height: 30px;
+            top: -15px;
+            right: 20px;
+        }
+
+        .cloud-2 {
+            width: 60px;
+            height: 20px;
+            top: 70px;
+            right: 10%;
+            animation: cloudMoveReverse 12s linear infinite, fadeIn 0.3s forwards 0.2s;
+        }
+
+        .cloud-2:before {
+            width: 25px;
+            height: 25px;
+            top: -15px;
+            left: 10px;
+        }
+
+        .cloud-2:after {
+            width: 20px;
+            height: 20px;
+            top: -10px;
+            right: 10px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes cloudMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-300%); }
+        }
+
+        @keyframes cloudMoveReverse {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(300%); }
+        }
+
+        /* Buildings */
+        .building {
+            position: relative;
+            border-radius: 4px 4px 0 0;
+            bottom: 0;
+            margin: 0 3px;
+            transform: translateY(100%);
+            animation: buildingRise 0.8s forwards;
+            overflow: hidden;
+        }
+
+        @keyframes buildingRise {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .building-1 {
+            width: 50px;
+            height: 120px;
+            background: var(--primary);
+            animation-delay: 0.05s;
+        }
+
+        .building-2 {
+            width: 70px;
+            height: 180px;
+            background: var(--secondary);
+            animation-delay: 0.1s;
+        }
+
+        .building-3 {
+            width: 90px;
+            height: 150px;
+            background: var(--teal);
+            animation-delay: 0.15s;
+        }
+
+        .building-4 {
+            width: 110px;
+            height: 200px;
+            background: var(--success);
+            animation-delay: 0.2s;
+        }
+
+        .building-5 {
+            width: 60px;
+            height: 130px;
+            background: var(--purple);
+            animation-delay: 0.25s;
+        }
+
+        /* Main Building */
+        .main-building {
+            position: relative;
+            width: 130px;
+            height: 220px;
+            background: linear-gradient(to bottom, var(--dark-light), var(--dark));
+            border-radius: 8px 8px 0 0;
+            margin: 0 5px;
+            overflow: hidden;
+            transform: translateY(100%);
+            animation: mainBuildingRise 1s forwards;
+            animation-delay: 0.3s;
+            box-shadow: 0 0 20px var(--shadow-dark);
+        }
+
+        @keyframes mainBuildingRise {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .roof {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background: var(--secondary);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .door {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 45px;
+            background: var(--dark);
+            border-radius: 4px 4px 0 0;
+            overflow: hidden;
+        }
+
+        .door:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 5px;
+            width: 5px;
+            height: 5px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* Windows for all buildings */
+        .window {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            transition: all 0.15s ease;
+        }
+
+        .window.lit {
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--window-glow);
+        }
+
+        /* Window Grid for Main Building */
+        .window-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            gap: 10px;
+            padding: 25px 15px;
+            height: calc(100% - 15px);
+        }
+
+        .window-grid .window {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Loading Text and Progress */
+        .loading-content {
+            text-align: center;
+            color: white;
+            max-width: 600px;
+            padding: 0 20px;
+        }
+
+        .loading-content h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px var(--shadow-dark);
+            opacity: 0;
+            animation: fadeInUp 0.4s forwards;
+            animation-delay: 0.4s;
+        }
+
+        .loading-content p {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+            opacity: 0;
+            animation: fadeInUp 0.4s forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .progress-container {
+            width: 300px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0 auto;
+            position: relative;
+            opacity: 0;
+            animation: fadeInUp 0.4s forwards;
+            animation-delay: 0.6s;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
+            border-radius: 10px;
+            transition: width 0.1s linear;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.4) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            animation: shimmer 0.8s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Student Icons */
+        .student-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+            opacity: 0;
+            animation: fadeInUp 0.4s forwards;
+            animation-delay: 0.7s;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px var(--shadow-medium);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .icon:hover {
+            transform: translateY(-3px);
+        }
+
+        .icon svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--dark);
+            position: relative;
+            z-index: 2;
+        }
+
+        .icon:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
+            transform: translateX(-100%) rotate(45deg);
+            animation: iconShine 1.5s infinite;
+        }
+
+        .icon:nth-child(2):after {
+            animation-delay: 0.2s;
+        }
+
+        .icon:nth-child(3):after {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes iconShine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            20%, 100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        /* Hide main content initially */
+        .page-content {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
     </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">Student Housing</div>
-            <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Listings</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#" class="favorites-link"><i class="fas fa-heart"></i> Favorites</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main class="container">
-        <section class="apartment-details">
-            <div class="image-gallery">
-                <div class="main-image">
-                    <img id="currentImage" src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Apartment main view">
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="city-scene">
+            <div class="sun"></div>
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+            <div class="skyline">
+                <div class="building building-1" id="building-1"></div>
+                <div class="building building-2" id="building-2"></div>
+                <div class="main-building" id="main-building">
+                    <div class="roof"></div>
+                    <div class="window-grid" id="window-grid">
+                        <!-- Windows will be added by JavaScript -->
+                    </div>
                 </div>
-                <div class="thumbnail-container">
-                    <img class="thumbnail active" src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Apartment main view">
-                    <img class="thumbnail" src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Apartment kitchen">
-                    <img class="thumbnail" src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Apartment bathroom">
-                    <img class="thumbnail" src="https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Apartment bedroom">
+                <div class="building building-3" id="building-3"></div>
+                <div class="building building-4" id="building-4"></div>
+                <div class="building building-5" id="building-5"></div>
+            </div>
+        </div>
+        <div class="loading-content">
+            <h1>Student Apartments</h1>
+            <p>Your perfect campus home awaits...</p>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div class="student-icons">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z"></path>
+                    </svg>
+                </div>
+                <div class="icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12,5.5A3.5,3.5 0 0,1 15.5,9A3.5,3.5 0 0,1 12,12.5A3.5,3.5 0 0,1 8.5,9A3.5,3.5 0 0,1 12,5.5M5,8C5.56,8 6.08,8.15 6.53,8.42C6.38,9.85 6.8,11.27 7.66,12.38C7.16,13.34 6.16,14 5,14A3,3 0 0,1 2,11A3,3 0 0,1 5,8M19,8A3,3 0 0,1 22,11A3,3 0 0,1 19,14C17.84,14 16.84,13.34 16.34,12.38C17.2,11.27 17.62,9.85 17.47,8.42C17.92,8.15 18.44,8 19,8M5.5,18.25C5.5,16.18 8.41,14.5 12,14.5C15.59,14.5 18.5,16.18 18.5,18.25V20H5.5V18.25M0,20V18.5C0,17.11 1.89,15.94 4.45,15.6C3.86,16.28 3.5,17.22 3.5,18.25V20H0M24,20H20.5V18.25C20.5,17.22 20.14,16.28 19.55,15.6C22.11,15.94 24,17.11 24,18.5V20Z"></path>
+                    </svg>
+                </div>
+                <div class="icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12,3L1,9L12,15L23,9L12,3M12,16.5L2,10.5V17L12,23L22,17V10.5L12,16.5M8.47,5.88L9.4,8H14.6L15.53,5.88L18.41,7.96L15.53,5.88L13,3.24V6.12L12,7L11,6.12V3.24L8.47,5.88Z"></path>
+                    </svg>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div class="details-header">
-                <div>
-                    <h1>Modern Studio Apartment Near University</h1>
-                    <p class="location"><i class="fas fa-map-marker-alt"></i> 123 College Street, University District</p>
-                </div>
-                <button id="favoriteBtn" class="favorite-btn"><i class="far fa-heart"></i> Add to Favorites</button>
-            </div>
-
-            <div class="details-grid">
-                <div class="info-section">
-                    <h2>Apartment Details</h2>
-                    <div class="features">
-                        <div class="feature">
-                            <i class="fas fa-ruler-combined"></i>
-                            <span>65 m²</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-bed"></i>
-                            <span>1 Bedroom</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-bath"></i>
-                            <span>1 Bathroom</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-wifi"></i>
-                            <span>Free Wi-Fi</span>
-                        </div>
-                    </div>
-                    
-                    <div class="description">
-                        <h3>Description</h3>
-                        <p>This modern studio apartment is perfect for students. Located just a 5-minute walk from the university campus, it offers convenience and comfort. The apartment features a fully equipped kitchen, a comfortable living area, and a spacious bathroom.</p>
-                        <p>Amenities include high-speed internet, air conditioning, heating, and 24/7 security. The building also has a common study area and laundry facilities.</p>
-                        
-                        <h3>Additional Information</h3>
-                        <ul>
-                            <li>Fully furnished</li>
-                            <li>Utilities included in rent</li>
-                            <li>Minimum lease: 6 months</li>
-                            <li>Available from: September 1, 2023</li>
-                            <li>Security deposit: $500</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="contact-payment-section">
-                    <div class="price-card">
-                        <div class="price">$650<span>/month</span></div>
-                        <button class="book-now-btn">Book Now</button>
-                    </div>
-
-                    <div class="contact-section">
-                        <h2>Contact Information</h2>
-                        <div class="contact-info">
-                            <div class="contact-item">
-                                <i class="fas fa-user"></i>
-                                <span>John Smith (Property Manager)</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-phone"></i>
-                                <span>+1 (555) 123-4567</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <span>housing@example.com</span>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-form">
-                            <h3>Send a Message</h3>
-                            <form id="contactForm">
-                                <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" id="name" name="name" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" id="email" name="email" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="message">Message</label>
-                                    <textarea id="message" name="message" rows="4" required></textarea>
-                                </div>
-                                <button type="submit" class="submit-btn">Send Message</button>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="payment-section">
-                        <h2>Payment Options</h2>
-                        <div class="payment-methods">
-                            <div class="payment-method">
-                                <input type="radio" id="creditCard" name="paymentMethod" checked>
-                                <label for="creditCard">
-                                    <i class="fas fa-credit-card"></i> Credit/Debit Card
-                                </label>
-                            </div>
-                            <div class="payment-method">
-                                <input type="radio" id="bankTransfer" name="paymentMethod">
-                                <label for="bankTransfer">
-                                    <i class="fas fa-university"></i> Bank Transfer
-                                </label>
-                            </div>
-                            <div class="payment-method">
-                                <input type="radio" id="paypal" name="paymentMethod">
-                                <label for="paypal">
-                                    <i class="fab fa-paypal"></i> PayPal
-                                </label>
-                            </div>
-                        </div>
-                        
-                        <div class="payment-schedule">
-                            <h3>Payment Schedule</h3>
-                            <div class="schedule-options">
-                                <div class="schedule-option">
-                                    <input type="radio" id="monthly" name="paymentSchedule" checked>
-                                    <label for="monthly">Monthly</label>
-                                </div>
-                                <div class="schedule-option">
-                                    <input type="radio" id="quarterly" name="paymentSchedule">
-                                    <label for="quarterly">Quarterly (5% discount)</label>
-                                </div>
-                                <div class="schedule-option">
-                                    <input type="radio" id="annually" name="paymentSchedule">
-                                    <label for="annually">Annually (10% discount)</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Student Housing</h3>
-                <p>Providing quality accommodation for students since 2010.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
+    <!-- Page Content -->
+    <div class="page-content" id="page-content">
+        <header>
+            <nav>
+                <div class="logo">Student Housing</div>
+                <ul class="nav-links">
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Listings</a></li>
-                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">About</a></li>
                     <li><a href="#">Contact</a></li>
+                    <li><a href="#" class="favorites-link"><i class="fas fa-heart"></i> Favorites</a></li>
                 </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <p><i class="fas fa-map-marker-alt"></i> 456 Main Street, City</p>
-                <p><i class="fas fa-phone"></i> +1 (555) 987-6543</p>
-                <p><i class="fas fa-envelope"></i> info@studenthousing.com</p>
-            </div>
-            <div class="footer-section">
-                <h3>Follow Us</h3>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
+            </nav>
+        </header>
+
+        <main class="container">
+            <section class="apartment-details">
+                <div class="image-gallery">
+                    <div class="main-image">
+                        <img id="currentImage" src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Apartment main view">
+                    </div>
+                    <div class="thumbnail-container">
+                        <img class="thumbnail active" src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Apartment main view">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Apartment kitchen">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Apartment bathroom">
+                        <img class="thumbnail" src="https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Apartment bedroom">
+                    </div>
+                </div>
+
+                <div class="details-header">
+                    <div>
+                        <h1>Modern Studio Apartment Near University</h1>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> 123 College Street, University District</p>
+                    </div>
+                    <button id="favoriteBtn" class="favorite-btn"><i class="far fa-heart"></i> Add to Favorites</button>
+                </div>
+
+                <div class="details-grid">
+                    <div class="info-section">
+                        <h2>Apartment Details</h2>
+                        <div class="features">
+                            <div class="feature">
+                                <i class="fas fa-ruler-combined"></i>
+                                <span>65 m²</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bed"></i>
+                                <span>1 Bedroom</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bath"></i>
+                                <span>1 Bathroom</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-wifi"></i>
+                                <span>Free Wi-Fi</span>
+                            </div>
+                        </div>
+                        
+                        <div class="description">
+                            <h3>Description</h3>
+                            <p>This modern studio apartment is perfect for students. Located just a 5-minute walk from the university campus, it offers convenience and comfort. The apartment features a fully equipped kitchen, a comfortable living area, and a spacious bathroom.</p>
+                            <p>Amenities include high-speed internet, air conditioning, heating, and 24/7 security. The building also has a common study area and laundry facilities.</p>
+                            
+                            <h3>Additional Information</h3>
+                            <ul>
+                                <li>Fully furnished</li>
+                                <li>Utilities included in rent</li>
+                                <li>Minimum lease: 6 months</li>
+                                <li>Available from: September 1, 2023</li>
+                                <li>Security deposit: $500</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="contact-payment-section">
+                        <div class="price-card">
+                            <div class="price">$650<span>/month</span></div>
+                            <button class="book-now-btn">Book Now</button>
+                        </div>
+
+                        <div class="contact-section">
+                            <h2>Contact Information</h2>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <i class="fas fa-user"></i>
+                                    <span>John Smith (Property Manager)</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-phone"></i>
+                                    <span>+1 (555) 123-4567</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>housing@example.com</span>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-form">
+                                <h3>Send a Message</h3>
+                                <form id="contactForm">
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" id="name" name="name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" id="email" name="email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message">Message</label>
+                                        <textarea id="message" name="message" rows="4" required></textarea>
+                                    </div>
+                                    <button type="submit" class="submit-btn">Send Message</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="payment-section">
+                            <h2>Payment Options</h2>
+                            <div class="payment-methods">
+                                <div class="payment-method">
+                                    <input type="radio" id="creditCard" name="paymentMethod" checked>
+                                    <label for="creditCard">
+                                        <i class="fas fa-credit-card"></i> Credit/Debit Card
+                                    </label>
+                                </div>
+                                <div class="payment-method">
+                                    <input type="radio" id="bankTransfer" name="paymentMethod">
+                                    <label for="bankTransfer">
+                                        <i class="fas fa-university"></i> Bank Transfer
+                                    </label>
+                                </div>
+                                <div class="payment-method">
+                                    <input type="radio" id="paypal" name="paymentMethod">
+                                    <label for="paypal">
+                                        <i class="fab fa-paypal"></i> PayPal
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="payment-schedule">
+                                <h3>Payment Schedule</h3>
+                                <div class="schedule-options">
+                                    <div class="schedule-option">
+                                        <input type="radio" id="monthly" name="paymentSchedule" checked>
+                                        <label for="monthly">Monthly</label>
+                                    </div>
+                                    <div class="schedule-option">
+                                        <input type="radio" id="quarterly" name="paymentSchedule">
+                                        <label for="quarterly">Quarterly (5% discount)</label>
+                                    </div>
+                                    <div class="schedule-option">
+                                        <input type="radio" id="annually" name="paymentSchedule">
+                                        <label for="annually">Annually (10% discount)</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Student Housing</h3>
+                    <p>Providing quality accommodation for students since 2010.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Listings</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 456 Main Street, City</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 987-6543</p>
+                    <p><i class="fas fa-envelope"></i> info@studenthousing.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2023 Student Housing. All rights reserved.</p>
-        </div>
-    </footer>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Student Housing. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Loading screen animation
+            const loadingScreen = document.getElementById('loading-screen');
+            const pageContent = document.getElementById('page-content');
+            const progressBar = document.getElementById('progress-bar');
+            const windowGrid = document.getElementById('window-grid');
+            const mainBuilding = document.getElementById('main-building');
+            
+            // Create windows for main building
+            for (let i = 0; i < 15; i++) {
+                const window = document.createElement('div');
+                window.classList.add('window');
+                windowGrid.appendChild(window);
+            }
+            
+            // Create windows for other buildings
+            function createWindowsForBuilding(buildingId, rows, cols) {
+                const building = document.getElementById(buildingId);
+                if (!building) return;
+                
+                const buildingWidth = building.offsetWidth;
+                const buildingHeight = building.offsetHeight;
+                const windowWidth = (buildingWidth / (cols + 1)) * 0.8; // Make windows slightly smaller
+                const windowHeight = windowWidth * 1.2; // Slightly taller than wide
+                
+                for (let row = 0; row < rows; row++) {
+                    for (let col = 0; col < cols; col++) {
+                        const window = document.createElement('div');
+                        window.classList.add('window');
+                        window.style.width = `${windowWidth}px`;
+                        window.style.height = `${windowHeight}px`;
+                        window.style.left = `${(col + 0.5) * (buildingWidth / cols)}px`;
+                        window.style.top = `${(row + 1) * (buildingHeight / (rows + 2))}px`;
+                        // Add transform to center windows horizontally
+                        window.style.transform = 'translateX(-50%)';
+                        building.appendChild(window);
+                    }
+                }
+            }
+            
+            // Create windows for each building with appropriate number of rows and columns
+            setTimeout(() => {
+                createWindowsForBuilding('building-1', 3, 2); // Small building
+                createWindowsForBuilding('building-2', 4, 2); // Medium building
+                createWindowsForBuilding('building-3', 3, 3); // Medium building
+                createWindowsForBuilding('building-4', 5, 3); // Tall building
+                createWindowsForBuilding('building-5', 3, 2); // Small building
+            }, 1000);
+            
+            // Get all windows
+            const getAllWindows = () => document.querySelectorAll('.window');
+            
+            // Set loading duration to 3 seconds
+            const loadingDuration = 3000;
+            const startTime = Date.now();
+            const endTime = startTime + loadingDuration;
+            
+            // Update frequency
+            const updateInterval = 40; // milliseconds
+            
+            // Light up windows in sequence with precise timing
+            const updateProgress = () => {
+                const currentTime = Date.now();
+                const elapsedTime = currentTime - startTime;
+                
+                // Calculate progress percentage (0-100)
+                const progress = Math.min(Math.floor((elapsedTime / loadingDuration) * 100), 100);
+                
+                // Update progress bar
+                progressBar.style.width = `${progress}%`;
+                
+                // Get all windows (including newly created ones)
+                const allWindows = getAllWindows();
+                
+                // Calculate how many windows to light up
+                const windowsToLight = Math.floor((progress / 100) * allWindows.length);
+                
+                // Light up windows randomly
+                const unlitWindows = Array.from(allWindows).filter(window => !window.classList.contains('lit'));
+                
+                for (let i = 0; i < windowsToLight - (allWindows.length - unlitWindows.length); i++) {
+                    if (unlitWindows.length > 0) {
+                        const randomIndex = Math.floor(Math.random() * unlitWindows.length);
+                        unlitWindows[randomIndex].classList.add('lit');
+                        unlitWindows.splice(randomIndex, 1);
+                    }
+                }
+                
+                // Check if loading is complete
+                if (currentTime < endTime) {
+                    // Continue updating
+                    setTimeout(updateProgress, updateInterval);
+                } else {
+                    // Loading complete
+                    progressBar.style.width = '100%';
+                    
+                    // Light up all remaining windows with a wave effect
+                    const remainingWindows = Array.from(allWindows).filter(window => !window.classList.contains('lit'));
+                    remainingWindows.forEach((window, index) => {
+                        setTimeout(() => {
+                            window.classList.add('lit');
+                        }, index * 20);
+                    });
+                    
+                    // Show main content after a short delay
+                    setTimeout(() => {
+                        loadingScreen.style.opacity = 0;
+                        loadingScreen.style.transform = 'translateY(-20px)';
+                        
+                        setTimeout(() => {
+                            pageContent.style.opacity = 1;
+                            loadingScreen.style.display = 'none';
+                        }, 300);
+                    }, 300);
+                }
+            };
+            
+            // Start the progress updates
+            updateProgress();
+            
+            // Add interactive elements
+            const buildings = document.querySelectorAll('.building');
+            buildings.forEach(building => {
+                building.addEventListener('mouseenter', () => {
+                    building.style.transform = 'translateY(-5px)';
+                });
+                
+                building.addEventListener('mouseleave', () => {
+                    building.style.transform = 'translateY(0)';
+                });
+                
+                // Add click event to toggle windows in this building
+                building.addEventListener('click', () => {
+                    const buildingWindows = building.querySelectorAll('.window');
+                    buildingWindows.forEach((window, index) => {
+                        setTimeout(() => {
+                            window.classList.toggle('lit');
+                        }, index * 15);
+                    });
+                });
+            });
+            
+            // Add click event to main building for wave effect
+            mainBuilding.addEventListener('click', () => {
+                const mainWindows = mainBuilding.querySelectorAll('.window');
+                mainWindows.forEach((window, index) => {
+                    setTimeout(() => {
+                        window.classList.toggle('lit');
+                    }, index * 15);
+                });
+                
+                // Toggle them back after a short delay
+                setTimeout(() => {
+                    mainWindows.forEach((window, index) => {
+                        setTimeout(() => {
+                            window.classList.toggle('lit');
+                        }, index * 15);
+                    });
+                }, 300);
+            });
+
             // Image Gallery Functionality
             const thumbnails = document.querySelectorAll('.thumbnail');
             const mainImage = document.getElementById('currentImage');
@@ -1034,3 +1684,4 @@
     </script>
 </body>
 </html>
+

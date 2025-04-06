@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Apartments - Premium Loading</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for consistent colors */
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --primary-light: #a0cfff;
+            --secondary: #e74c3c;
+            --secondary-light: #ff7b6b;
+            --accent: #f1c40f;
+            --accent-light: #ffe97f;
+            --dark: #2c3e50;
+            --dark-light: #34495e;
+            --light: #ecf0f1;
+            --light-dark: #bdc3c7;
+            --success: #2ecc71;
+            --purple: #9b59b6;
+            --gradient-start: #6a11cb;
+            --gradient-end: #2575fc;
+            --window-glow: rgba(255, 235, 59, 0.7);
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-medium: rgba(0, 0, 0, 0.2);
+            --shadow-dark: rgba(0, 0, 0, 0.3);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            overflow-x: hidden;
+            color: var(--dark);
+        }
+
+        /* Loading Screen Styles */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        /* City Scene */
+        .city-scene {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 220px;
+            margin-bottom: 25px;
+        }
+
+        .skyline {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        /* Sun Animation */
+        .sun {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 30px var(--accent);
+            animation: sunPulse 1s infinite alternate, sunRise 0.4s forwards;
+            opacity: 0;
+        }
+
+        @keyframes sunPulse {
+            0% { box-shadow: 0 0 30px var(--accent); }
+            100% { box-shadow: 0 0 50px var(--accent); }
+        }
+
+        @keyframes sunRise {
+            0% { transform: translateX(-50%) translateY(50px); opacity: 0; }
+            100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+
+        /* Clouds */
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+            opacity: 0;
+            animation: fadeIn 0.3s forwards;
+        }
+
+        .cloud:before, .cloud:after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+        }
+
+        .cloud-1 {
+            width: 100px;
+            height: 30px;
+            top: 40px;
+            left: 10%;
+            animation: cloudMove 15s linear infinite, fadeIn 0.3s forwards 0.1s;
+        }
+
+        .cloud-1:before {
+            width: 40px;
+            height: 40px;
+            top: -20px;
+            left: 15px;
+        }
+
+        .cloud-1:after {
+            width: 30px;
+            height: 30px;
+            top: -15px;
+            right: 20px;
+        }
+
+        .cloud-2 {
+            width: 60px;
+            height: 20px;
+            top: 70px;
+            right: 10%;
+            animation: cloudMoveReverse 12s linear infinite, fadeIn 0.3s forwards 0.2s;
+        }
+
+        .cloud-2:before {
+            width: 25px;
+            height: 25px;
+            top: -15px;
+            left: 10px;
+        }
+
+        .cloud-2:after {
+            width: 20px;
+            height: 20px;
+            top: -10px;
+            right: 10px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes cloudMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-300%); }
+        }
+
+        @keyframes cloudMoveReverse {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(300%); }
+        }
+
+        /* Buildings */
+        .building {
+            position: relative;
+            border-radius: 4px 4px 0 0;
+            bottom: 0;
+            margin: 0 3px;
+            transform: translateY(100%);
+            animation: buildingRise 0.4s forwards;
+            overflow: hidden;
+        }
+
+        @keyframes buildingRise {
+            to { transform: translateY(0); }
+        }
+
+        .building-1 {
+            width: 50px;
+            height: 120px;
+            background: var(--primary);
+            animation-delay: 0.05s;
+        }
+
+        .building-2 {
+            width: 70px;
+            height: 180px;
+            background: var(--secondary);
+            animation-delay: 0.1s;
+        }
+
+        .building-3 {
+            width: 90px;
+            height: 150px;
+            background: var(--accent);
+            animation-delay: 0.15s;
+        }
+
+        .building-4 {
+            width: 110px;
+            height: 200px;
+            background: var(--success);
+            animation-delay: 0.2s;
+        }
+
+        .building-5 {
+            width: 60px;
+            height: 130px;
+            background: var(--purple);
+            animation-delay: 0.25s;
+        }
+
+        /* Main Building */
+        .main-building {
+            position: relative;
+            width: 130px;
+            height: 220px;
+            background: linear-gradient(to bottom, var(--dark-light), var(--dark));
+            border-radius: 8px 8px 0 0;
+            margin: 0 5px;
+            overflow: hidden;
+            transform: translateY(100%);
+            animation: mainBuildingRise 0.5s forwards;
+            animation-delay: 0.3s;
+            box-shadow: 0 0 20px var(--shadow-dark);
+        }
+
+        @keyframes mainBuildingRise {
+            to { transform: translateY(0); }
+        }
+
+        .roof {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background: var(--secondary);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .door {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 45px;
+            background: var(--dark);
+            border-radius: 4px 4px 0 0;
+            overflow: hidden;
+        }
+
+        .door:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 5px;
+            width: 5px;
+            height: 5px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* Windows for all buildings */
+        .window {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            transition: all 0.15s ease;
+        }
+
+        .window.lit {
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--window-glow);
+        }
+
+        /* Window Grid for Main Building */
+        .window-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            gap: 10px;
+            padding: 25px 15px;
+            height: calc(100% - 15px);
+        }
+
+        .window-grid .window {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Loading Text and Progress */
+        .loading-content {
+            text-align: center;
+            color: white;
+            max-width: 600px;
+            padding: 0 20px;
+        }
+
+        .loading-content h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px var(--shadow-dark);
+            opacity: 0;
+            animation: fadeInUp 0.4s forwards;
+            animation-delay: 0.4s;
+        }
+
+        .loading-content p {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+            opacity: 0;
+            animation: fadeInUp 0.4s forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .progress-container {
+            width: 300px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0 auto;
+            position: relative;
+            opacity: 0;
+            animation: fadeInUp 0.4s forwards;
+            animation-delay: 0.6s;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
+            border-radius: 10px;
+            transition: width 0.1s linear;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.4) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            animation: shimmer 0.8s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Student Icons */
+        .student-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+            opacity: 0;
+            animation: fadeInUp 0.4s forwards;
+            animation-delay: 0.7s;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px var(--shadow-medium);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .icon:hover {
+            transform: translateY(-3px);
+        }
+
+        .icon svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--dark);
+            position: relative;
+            z-index: 2;
+        }
+
+        .icon:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
+            transform: translateX(-100%) rotate(45deg);
+            animation: iconShine 1.5s infinite;
+        }
+
+        .icon:nth-child(2):after {
+            animation-delay: 0.2s;
+        }
+
+        .icon:nth-child(3):after {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes iconShine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            20%, 100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            opacity: 0;
+            display: none;
+            transition: opacity 0.3s ease;
+        }
+
+        header {
+            background-color: var(--dark);
+            padding: 20px 50px;
+            color: white;
+            box-shadow: 0 2px 10px var(--shadow-light);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-shadow: 0 1px 2px var(--shadow-medium);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), 
+                        url('https://source.unsplash.com/random/1600x900/?apartment') no-repeat center center/cover;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, transparent 20%, var(--dark) 80%);
+            opacity: 0.8;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px var(--shadow-dark);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--shadow-medium);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--shadow-dark);
+        }
+
+        .cta-button:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.2) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .cta-button:hover:after {
+            transform: translateX(100%);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .city-scene {
+                max-width: 400px;
+                height: 180px;
+            }
+
+            .building-1, .building-5 {
+                display: none;
+            }
+
+            .main-building {
+                width: 100px;
+                height: 180px;
+            }
+
+            .loading-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .loading-content p {
+                font-size: 1rem;
+            }
+
+            nav {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .city-scene {
+                max-width: 300px;
+                height: 160px;
+            }
+
+            .building-2, .building-4 {
+                width: 50px;
+                height: 120px;
+            }
+
+            .building-3 {
+                width: 40px;
+                height: 100px;
+            }
+
+            .main-building {
+                width: 80px;
+                height: 160px;
+            }
+
+            .loading-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .progress-container {
+                width: 250px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="city-scene">
+            <div class="sun"></div>
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+            <div class="skyline">
+                <div class="building building-1" id="building-1"></div>
+                <div class="building building-2" id="building-2"></div>
+                <div class="main-building" id="main-building">
+                    <div class="roof"></div>
+                    <div class="window-grid" id="window-grid">
+                        <!-- Windows will be added by JavaScript -->
+                    </div>
+                    <div class="door"></div>
+                </div>
+                <div class="building building-3" id="building-3"></div>
+                <div class="building building-4" id="building-4"></div>
+                <div class="building building-5" id="building-5"></div>
+            </div>
+        </div>
+        <div class="loading-content">
+            <h1>Student Apartments</h1>
+            <p>Your perfect campus home awaits...</p>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div class="student-icons">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z"></path>
+                    </svg>
+                </div>
+                <div class="icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12,5.5A3.5,3.5 0 0,1 15.5,9A3.5,3.5 0 0,1 12,12.5A3.5,3.5 0 0,1 8.5,9A3.5,3.5 0 0,1 12,5.5M5,8C5.56,8 6.08,8.15 6.53,8.42C6.38,9.85 6.8,11.27 7.66,12.38C7.16,13.34 6.16,14 5,14A3,3 0 0,1 2,11A3,3 0 0,1 5,8M19,8A3,3 0 0,1 22,11A3,3 0 0,1 19,14C17.84,14 16.84,13.34 16.34,12.38C17.2,11.27 17.62,9.85 17.47,8.42C17.92,8.15 18.44,8 19,8M5.5,18.25C5.5,16.18 8.41,14.5 12,14.5C15.59,14.5 18.5,16.18 18.5,18.25V20H5.5V18.25M0,20V18.5C0,17.11 1.89,15.94 4.45,15.6C3.86,16.28 3.5,17.22 3.5,18.25V20H0M24,20H20.5V18.25C20.5,17.22 20.14,16.28 19.55,15.6C22.11,15.94 24,17.11 24,18.5V20Z"></path>
+                    </svg>
+                </div>
+                <div class="icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12,3L1,9L12,15L23,9L12,3M12,16.5L2,10.5V17L12,23L22,17V10.5L12,16.5M8.47,5.88L9.4,8H14.6L15.53,5.88L18.41,7.96L15.53,5.88L13,3.24V6.12L12,7L11,6.12V3.24L8.47,5.88Z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+    // Remove student icons
+    document.querySelector('.student-icons')?.remove();
+    
+    // Elements
+    const progressBar = document.getElementById('progress-bar');
+    const loadingScreen = document.getElementById('loading-screen');
+    const mainContent = document.getElementById('main-content');
+    const windowGrid = document.getElementById('window-grid');
+    const mainBuilding = document.getElementById('main-building');
+    
+    // Create windows for main building
+    for (let i = 0; i < 15; i++) {
+        const window = document.createElement('div');
+        window.classList.add('window');
+        windowGrid.appendChild(window);
+    }
+    
+    // Create windows for other buildings
+    function createWindowsForBuilding(buildingId, rows, cols) {
+        const building = document.getElementById(buildingId);
+        if (!building) return;
+        
+        const buildingWidth = building.offsetWidth;
+        const buildingHeight = building.offsetHeight;
+        const windowWidth = buildingWidth / (cols + 1);
+        const windowHeight = windowWidth * 1.2; // Slightly taller than wide
+        
+        for (let row = 0; row < rows; row++) {
+            for (let col = 0; col < cols; col++) {
+                const window = document.createElement('div');
+                window.classList.add('window');
+                window.style.width = `${windowWidth}px`;
+                window.style.height = `${windowHeight}px`;
+                window.style.left = `${(col + 0.5) * (buildingWidth / cols)}px`;
+                window.style.top = `${(row + 1) * (buildingHeight / (rows + 2))}px`;
+                window.style.transform = 'translate(-50%, 0)';
+                building.appendChild(window);
+            }
+        }
+    }
+    
+    // Create windows for each building with appropriate number of rows and columns
+    setTimeout(() => {
+        createWindowsForBuilding('building-1', 3, 2); // Small building
+        createWindowsForBuilding('building-2', 4, 2); // Medium building
+        createWindowsForBuilding('building-3', 3, 3); // Medium building
+        createWindowsForBuilding('building-4', 5, 3); // Tall building
+        createWindowsForBuilding('building-5', 3, 2); // Small building
+    }, 500); // Wait for buildings to rise
+    
+    // Get all windows
+    const getAllWindows = () => document.querySelectorAll('.window');
+    
+    // Set loading duration to 2 seconds
+    const loadingDuration = 2000; // 2 seconds
+    const startTime = Date.now();
+    const endTime = startTime + loadingDuration;
+    
+    // Update frequency
+    const updateInterval = 40; // milliseconds
+    
+    // Light up windows in sequence with precise timing
+    const updateProgress = () => {
+        const currentTime = Date.now();
+        const elapsedTime = currentTime - startTime;
+        
+        // Calculate progress percentage (0-100)
+        const progress = Math.min(Math.floor((elapsedTime / loadingDuration) * 100), 100);
+        
+        // Update progress bar
+        progressBar.style.width = `${progress}%`;
+        
+        // Get all windows (including newly created ones)
+        const allWindows = getAllWindows();
+        
+        // Calculate how many windows to light up
+        const windowsToLight = Math.floor((progress / 100) * allWindows.length);
+        
+        // Light up windows randomly
+        const unlitWindows = Array.from(allWindows).filter(window => !window.classList.contains('lit'));
+        
+        for (let i = 0; i < windowsToLight - (allWindows.length - unlitWindows.length); i++) {
+            if (unlitWindows.length > 0) {
+                const randomIndex = Math.floor(Math.random() * unlitWindows.length);
+                unlitWindows[randomIndex].classList.add('lit');
+                unlitWindows.splice(randomIndex, 1);
+            }
+        }
+        
+        // Check if loading is complete
+        if (currentTime < endTime) {
+            // Continue updating
+            setTimeout(updateProgress, updateInterval);
+        } else {
+            // Loading complete - at 2 seconds
+            progressBar.style.width = '100%';
+            
+            // Light up all remaining windows with a wave effect
+            const remainingWindows = Array.from(allWindows).filter(window => !window.classList.contains('lit'));
+            remainingWindows.forEach((window, index) => {
+                setTimeout(() => {
+                    window.classList.add('lit');
+                }, index * 20);
+            });
+            
+            // Show main content after a short delay
+            setTimeout(() => {
+                loadingScreen.style.opacity = 0;
+                loadingScreen.style.transform = 'translateY(-20px)';
+                mainContent.style.display = 'block';
+                
+                setTimeout(() => {
+                    mainContent.style.opacity = 1;
+                    loadingScreen.style.display = 'none';
+                }, 300);
+            }, 300);
+        }
+    };
+    
+    // Start the progress updates
+    updateProgress();
+    
+    // Add interactive elements
+    const buildings = document.querySelectorAll('.building');
+    buildings.forEach(building => {
+        building.addEventListener('mouseenter', () => {
+            building.style.transform = 'translateY(-5px)';
+        });
+        
+        building.addEventListener('mouseleave', () => {
+            building.style.transform = 'translateY(0)';
+        });
+        
+        // Add click event to toggle windows in this building
+        building.addEventListener('click', () => {
+            const buildingWindows = building.querySelectorAll('.window');
+            buildingWindows.forEach((window, index) => {
+                setTimeout(() => {
+                    window.classList.toggle('lit');
+                }, index * 15);
+            });
+        });
+    });
+    
+    // Add click event to main building for wave effect
+    mainBuilding.addEventListener('click', () => {
+        const mainWindows = mainBuilding.querySelectorAll('.window');
+        mainWindows.forEach((window, index) => {
+            setTimeout(() => {
+                window.classList.toggle('lit');
+            }, index * 15);
+        });
+        
+        // Toggle them back after a short delay
+        setTimeout(() => {
+            mainWindows.forEach((window, index) => {
+                setTimeout(() => {
+                    window.classList.toggle('lit');
+                }, index * 15);
+            });
+        }, 300);
+    });
+});
+    </script>
+</body>
+</html>

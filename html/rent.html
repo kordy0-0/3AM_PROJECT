@@ -18,6 +18,26 @@
     --white: #ffffff;
     --shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
     --shadow-lg: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    
+    /* Loading screen variables */
+    --primary: #3498db;
+    --primary-light: #a0cfff;
+    --secondary: #e74c3c;
+    --secondary-light: #ff7b6b;
+    --accent: #f1c40f;
+    --accent-light: #ffe97f;
+    --dark-light: #34495e;
+    --light: #ecf0f1;
+    --light-dark: #bdc3c7;
+    --success: #2ecc71;
+    --purple: #9b59b6;
+    --teal: #1abc9c;
+    --gradient-start: #6a11cb;
+    --gradient-end: #2575fc;
+    --window-glow: rgba(255, 235, 59, 0.7);
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-medium: rgba(0, 0, 0, 0.2);
+    --shadow-dark: rgba(0, 0, 0, 0.3);
 }
 
 * {
@@ -467,420 +487,1048 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+/* Loading Screen Styles */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* City Scene */
+.city-scene {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    height: 250px;
+    margin-bottom: 25px;
+}
+
+.skyline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+/* Sun Animation */
+.sun {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 30px var(--accent);
+    animation: sunPulse 1s infinite alternate, sunRise 0.4s forwards;
+    opacity: 0;
+}
+
+@keyframes sunPulse {
+    0% { box-shadow: 0 0 30px var(--accent); }
+    100% { box-shadow: 0 0 50px var(--accent); }
+}
+
+@keyframes sunRise {
+    0% { transform: translateX(-50%) translateY(50px); opacity: 0; }
+    100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+}
+
+/* Clouds */
+.cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50px;
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+}
+
+.cloud:before, .cloud:after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+}
+
+.cloud-1 {
+    width: 100px;
+    height: 30px;
+    top: 40px;
+    left: 10%;
+    animation: cloudMove 15s linear infinite, fadeIn 0.3s forwards 0.1s;
+}
+
+.cloud-1:before {
+    width: 40px;
+    height: 40px;
+    top: -20px;
+    left: 15px;
+}
+
+.cloud-1:after {
+    width: 30px;
+    height: 30px;
+    top: -15px;
+    right: 20px;
+}
+
+.cloud-2 {
+    width: 60px;
+    height: 20px;
+    top: 70px;
+    right: 10%;
+    animation: cloudMoveReverse 12s linear infinite, fadeIn 0.3s forwards 0.2s;
+}
+
+.cloud-2:before {
+    width: 25px;
+    height: 25px;
+    top: -15px;
+    left: 10px;
+}
+
+.cloud-2:after {
+    width: 20px;
+    height: 20px;
+    top: -10px;
+    right: 10px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes cloudMove {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-300%); }
+}
+
+@keyframes cloudMoveReverse {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(300%); }
+}
+
+/* Buildings */
+.building {
+    position: relative;
+    border-radius: 4px 4px 0 0;
+    bottom: 0;
+    margin: 0 3px;
+    transform: translateY(100%);
+    animation: buildingRise 0.8s forwards;
+    overflow: hidden;
+}
+
+@keyframes buildingRise {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+.building-1 {
+    width: 50px;
+    height: 120px;
+    background: var(--primary);
+    animation-delay: 0.05s;
+}
+
+.building-2 {
+    width: 70px;
+    height: 180px;
+    background: var(--secondary);
+    animation-delay: 0.1s;
+}
+
+.building-3 {
+    width: 90px;
+    height: 150px;
+    background: var(--teal);
+    animation-delay: 0.15s;
+}
+
+.building-4 {
+    width: 110px;
+    height: 200px;
+    background: var(--success);
+    animation-delay: 0.2s;
+}
+
+.building-5 {
+    width: 60px;
+    height: 130px;
+    background: var(--purple);
+    animation-delay: 0.25s;
+}
+
+/* Main Building */
+.main-building {
+    position: relative;
+    width: 130px;
+    height: 220px;
+    background: linear-gradient(to bottom, var(--dark-light), var(--dark));
+    border-radius: 8px 8px 0 0;
+    margin: 0 5px;
+    overflow: hidden;
+    transform: translateY(100%);
+    animation: mainBuildingRise 1s forwards;
+    animation-delay: 0.3s;
+    box-shadow: 0 0 20px var(--shadow-dark);
+}
+
+@keyframes mainBuildingRise {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+.roof {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    background: var(--secondary);
+    border-radius: 8px 8px 0 0;
+}
+
+.door {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 45px;
+    background: var(--dark);
+    border-radius: 4px 4px 0 0;
+    overflow: hidden;
+}
+
+.door:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    width: 5px;
+    height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+}
+
+/* Windows for all buildings */
+.window {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    transition: all 0.15s ease;
+}
+
+.window.lit {
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--window-glow);
+}
+
+/* Window Grid for Main Building */
+.window-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 10px;
+    padding: 25px 15px;
+    height: calc(100% - 15px);
+}
+
+.window-grid .window {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Loading Text and Progress */
+.loading-content {
+    text-align: center;
+    color: white;
+    max-width: 600px;
+    padding: 0 20px;
+}
+
+.loading-content h1 {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 10px var(--shadow-dark);
+    opacity: 0;
+    animation: fadeInUp 0.4s forwards;
+    animation-delay: 0.4s;
+}
+
+.loading-content p {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    opacity: 0.9;
+    opacity: 0;
+    animation: fadeInUp 0.4s forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.progress-container {
+    width: 300px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 auto;
+    position: relative;
+    opacity: 0;
+    animation: fadeInUp 0.4s forwards;
+    animation-delay: 0.6s;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--secondary));
+    border-radius: 10px;
+    transition: width 0.1s linear;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    animation: shimmer 0.8s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Student Icons */
+.student-icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    opacity: 0;
+    animation: fadeInUp 0.4s forwards;
+    animation-delay: 0.7s;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+    margin: 0 10px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px var(--shadow-medium);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.icon:hover {
+    transform: translateY(-3px);
+}
+
+.icon svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--dark);
+    position: relative;
+    z-index: 2;
+}
+
+.icon:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
+    transform: translateX(-100%) rotate(45deg);
+    animation: iconShine 1.5s infinite;
+}
+
+.icon:nth-child(2):after {
+    animation-delay: 0.2s;
+}
+
+.icon:nth-child(3):after {
+    animation-delay: 0.4s;
+}
+
+@keyframes iconShine {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    20%, 100% { transform: translateX(100%) rotate(45deg); }
+}
+
+/* Hide main content initially */
+.page-content {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
     </style>
 </head>
 <body>
-   
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <a class="navbar-brand" href="#">StudentHomes</a>
-            <button class="navbar-toggler" id="navbarToggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="navbar-menu" id="navbarMenu">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../html/home.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="../html/rent.html">Rentals</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../html/about us.html">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../html/contact us .html">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-            <h1>Find Your Perfect Student Accommodation</h1>
-            <p>Affordable, comfortable, and convenient housing options for students</p>
-            <div class="search-box">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" id="searchInput" placeholder="Search by location, university...">
-            </div>
-        </div>
-    </section>
-
-    <!-- Main Content -->
-    <div class="container main-content">
-        <!-- Mobile Filter Toggle -->
-        <button class="btn btn-primary filter-toggle" id="filterToggle">
-            <i class="fas fa-sliders-h"></i> Show Filters
-        </button>
-
-        <!-- Filter Section -->
-        <div class="filter-section" id="filterSection">
-            <div class="filter-row">
-                <div class="filter-col">
-                    <label for="priceRange">Price Range</label>
-                    <div class="price-inputs">
-                        <input type="number" id="minPrice" placeholder="Min">
-                        <span>-</span>
-                        <input type="number" id="maxPrice" placeholder="Max">
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="city-scene">
+            <div class="sun"></div>
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+            <div class="skyline">
+                <div class="building building-1" id="building-1"></div>
+                <div class="building building-2" id="building-2"></div>
+                <div class="main-building" id="main-building">
+                    <div class="roof"></div>
+                    <div class="window-grid" id="window-grid">
+                        <!-- Windows will be added by JavaScript -->
                     </div>
+                    <div class="door"></div>
                 </div>
-                <div class="filter-col">
-                    <label for="bedrooms">Bedrooms</label>
-                    <select id="bedrooms">
-                        <option value="">Any</option>
-                        <option value="1">1 Bedroom</option>
-                        <option value="2">2 Bedrooms</option>
-                        <option value="3">3 Bedrooms</option>
-                        <option value="4">4+ Bedrooms</option>
-                    </select>
-                </div>
-                <div class="filter-col">
-                    <label for="location">Location</label>
-                    <select id="location">
-                        <option value="">Any Location</option>
-                        <option value="Downtown">Downtown</option>
-                        <option value="Near Campus">Near Campus</option>
-                        <option value="West Side">West Side</option>
-                        <option value="East Side">East Side</option>
-                    </select>
-                </div>
-            </div>
-            <div class="filter-row">
-                <div class="filter-col full-width">
-                    <label>Amenities</label>
-                    <div class="amenities-checkboxes">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="wifi" value="wifi">
-                            <label for="wifi">WiFi</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="parking" value="parking">
-                            <label for="parking">Parking</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="ac" value="ac">
-                            <label for="ac">Air Conditioning</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="laundry" value="laundry">
-                            <label for="laundry">Laundry</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="gym" value="gym">
-                            <label for="gym">Gym</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="filter-actions">
-                <button id="resetFilters" class="btn btn-secondary">Reset</button>
-                <button id="applyFilters" class="btn btn-primary">Apply Filters</button>
+                <div class="building building-3" id="building-3"></div>
+                <div class="building building-4" id="building-4"></div>
+                <div class="building building-5" id="building-5"></div>
             </div>
         </div>
-
-        <!-- Apartments Section -->
-        <h2 class="section-title">Available Apartments</h2>
-        <div class="apartments-grid" id="apartmentsContainer">
-            <!-- Apartments will be dynamically added here -->
-        </div>
-
-        <!-- No Results Message -->
-        <div id="noResults" class="no-results hidden">
-            <h3>No apartments match your criteria</h3>
-            <p>Try adjusting your filters</p>
+        <div class="loading-content">
+            <h1>Student Apartments</h1>
+            <p>Your perfect campus home awaits...</p>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div class="student-icons">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z"></path>
+                    </svg>
+                </div>
+                <div class="icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12,5.5A3.5,3.5 0 0,1 15.5,9A3.5,3.5 0 0,1 12,12.5A3.5,3.5 0 0,1 8.5,9A3.5,3.5 0 0,1 12,5.5M5,8C5.56,8 6.08,8.15 6.53,8.42C6.38,9.85 6.8,11.27 7.66,12.38C7.16,13.34 6.16,14 5,14A3,3 0 0,1 2,11A3,3 0 0,1 5,8M19,8A3,3 0 0,1 22,11A3,3 0 0,1 19,14C17.84,14 16.84,13.34 16.34,12.38C17.2,11.27 17.62,9.85 17.47,8.42C17.92,8.15 18.44,8 19,8M5.5,18.25C5.5,16.18 8.41,14.5 12,14.5C15.59,14.5 18.5,16.18 18.5,18.25V20H5.5V18.25M0,20V18.5C0,17.11 1.89,15.94 4.45,15.6C3.86,16.28 3.5,17.22 3.5,18.25V20H0M24,20H20.5V18.25C20.5,17.22 20.14,16.28 19.55,15.6C22.11,15.94 24,17.11 24,18.5V20Z"></path>
+                    </svg>
+                </div>
+                <div class="icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12,3L1,9L12,15L23,9L12,3M12,16.5L2,10.5V17L12,23L22,17V10.5L12,16.5M8.47,5.88L9.4,8H14.6L15.53,5.88L18.41,7.96L15.53,5.88L13,3.24V6.12L12,7L11,6.12V3.24L8.47,5.88Z"></path>
+                    </svg>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h5>StudentHomes</h5>
-                    <p>Finding the perfect student accommodation made easy since 2010.</p>
-                </div>
-                <div class="footer-col">
-                    <h5>Quick Links</h5>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Rentals</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact</a></li>
+    <!-- Page Content -->
+    <div class="page-content" id="page-content">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <a class="navbar-brand" href="#">StudentHomes</a>
+                <button class="navbar-toggler" id="navbarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="navbar-menu" id="navbarMenu">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../html/home.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="../html/rent.html">Rentals</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../html/about us.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../html/contact us .html">Contact</a>
+                        </li>
                     </ul>
-                </div>
-                <div class="footer-col">
-                    <h5>Popular Areas</h5>
-                    <ul>
-                        <li><a href="#">Downtown</a></li>
-                        <li><a href="#">Near Campus</a></li>
-                        <li><a href="#">West Side</a></li>
-                        <li><a href="#">East Side</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h5>Contact Us</h5>
-                    <address>
-                        <p>123 University Ave</p>
-                        <p>College Town, ST 12345</p>
-                        <p>Email: info@studenthomes.com</p>
-                        <p>Phone: (123) 456-7890</p>
-                    </address>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; <span id="currentYear"></span> StudentHomes. All rights reserved.</p>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <h1>Find Your Perfect Student Accommodation</h1>
+                <p>Affordable, comfortable, and convenient housing options for students</p>
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search by location, university...">
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <div class="container main-content">
+            <!-- Mobile Filter Toggle -->
+            <button class="btn btn-primary filter-toggle" id="filterToggle">
+                <i class="fas fa-sliders-h"></i> Show Filters
+            </button>
+
+            <!-- Filter Section -->
+            <div class="filter-section" id="filterSection">
+                <div class="filter-row">
+                    <div class="filter-col">
+                        <label for="priceRange">Price Range</label>
+                        <div class="price-inputs">
+                            <input type="number" id="minPrice" placeholder="Min">
+                            <span>-</span>
+                            <input type="number" id="maxPrice" placeholder="Max">
+                        </div>
+                    </div>
+                    <div class="filter-col">
+                        <label for="bedrooms">Bedrooms</label>
+                        <select id="bedrooms">
+                            <option value="">Any</option>
+                            <option value="1">1 Bedroom</option>
+                            <option value="2">2 Bedrooms</option>
+                            <option value="3">3 Bedrooms</option>
+                            <option value="4">4+ Bedrooms</option>
+                        </select>
+                    </div>
+                    <div class="filter-col">
+                        <label for="location">Location</label>
+                        <select id="location">
+                            <option value="">Any Location</option>
+                            <option value="Downtown">Downtown</option>
+                            <option value="Near Campus">Near Campus</option>
+                            <option value="West Side">West Side</option>
+                            <option value="East Side">East Side</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="filter-row">
+                    <div class="filter-col full-width">
+                        <label>Amenities</label>
+                        <div class="amenities-checkboxes">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="wifi" value="wifi">
+                                <label for="wifi">WiFi</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="parking" value="parking">
+                                <label for="parking">Parking</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="ac" value="ac">
+                                <label for="ac">Air Conditioning</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="laundry" value="laundry">
+                                <label for="laundry">Laundry</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="gym" value="gym">
+                                <label for="gym">Gym</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-actions">
+                    <button id="resetFilters" class="btn btn-secondary">Reset</button>
+                    <button id="applyFilters" class="btn btn-primary">Apply Filters</button>
+                </div>
+            </div>
+
+            <!-- Apartments Section -->
+            <h2 class="section-title">Available Apartments</h2>
+            <div class="apartments-grid" id="apartmentsContainer">
+                <!-- Apartments will be dynamically added here -->
+            </div>
+
+            <!-- No Results Message -->
+            <div id="noResults" class="no-results hidden">
+                <h3>No apartments match your criteria</h3>
+                <p>Try adjusting your filters</p>
             </div>
         </div>
-    </footer>
 
- <script>
-        // Sample apartment data
-const apartments = [
-    {
-        id: 1,
-        title: 'Modern Studio Apartment',
-        price: 650,
-        location: 'Downtown',
-        bedrooms: 1,
-        bathrooms: 1,
-        size: 35,
-        amenities: ['wifi', 'ac', 'laundry'],
-        imageUrl: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80',
-        available: true
-    },
-    {
-        id: 2,
-        title: 'Spacious 2-Bedroom Flat',
-        price: 850,
-        location: 'Near Campus',
-        bedrooms: 2,
-        bathrooms: 1,
-        size: 65,
-        amenities: ['wifi', 'parking', 'ac', 'gym'],
-        imageUrl: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80',
-        available: true
-    },
-    {
-        id: 3,
-        title: 'Cozy 1-Bedroom Apartment',
-        price: 700,
-        location: 'East Side',
-        bedrooms: 1,
-        bathrooms: 1,
-        size: 45,
-        amenities: ['wifi', 'parking', 'laundry'],
-        imageUrl: 'https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80',
-        available: true
-    },
-    {
-        id: 4,
-        title: 'Luxury 3-Bedroom House',
-        price: 1200,
-        location: 'West Side',
-        bedrooms: 3,
-        bathrooms: 2,
-        size: 90,
-        amenities: ['wifi', 'parking', 'ac', 'laundry', 'gym'],
-        imageUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80',
-        available: true
-    },
-    {
-        id: 5,
-        title: 'Budget Studio for Students',
-        price: 550,
-        location: 'Near Campus',
-        bedrooms: 1,
-        bathrooms: 1,
-        size: 30,
-        amenities: ['wifi', 'laundry'],
-        imageUrl: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80',
-        available: true
-    },
-    {
-        id: 6,
-        title: 'Shared 4-Bedroom Apartment',
-        price: 450,
-        location: 'Downtown',
-        bedrooms: 4,
-        bathrooms: 2,
-        size: 100,
-        amenities: ['wifi', 'parking', 'ac', 'laundry', 'gym'],
-        imageUrl: 'https://images.unsplash.com/photo-1574362848149-11496d93a7c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80',
-        available: true
-    }
-];
-
-// DOM elements
-document.addEventListener('DOMContentLoaded', function() {
-    const apartmentsContainer = document.getElementById('apartmentsContainer');
-    const noResults = document.getElementById('noResults');
-    const searchInput = document.getElementById('searchInput');
-    const filterToggle = document.getElementById('filterToggle');
-    const filterSection = document.getElementById('filterSection');
-    const applyFilters = document.getElementById('applyFilters');
-    const resetFilters = document.getElementById('resetFilters');
-    const minPrice = document.getElementById('minPrice');
-    const maxPrice = document.getElementById('maxPrice');
-    const bedroomsSelect = document.getElementById('bedrooms');
-    const locationSelect = document.getElementById('location');
-    const amenityCheckboxes = document.querySelectorAll('input[type="checkbox"]');
-    const navbarToggle = document.getElementById('navbarToggle');
-    const navbarMenu = document.getElementById('navbarMenu');
-    
-    // Set current year in footer
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-    // Toggle navigation menu on mobile
-    navbarToggle.addEventListener('click', function() {
-        navbarMenu.classList.toggle('active');
-    });
-
-    // Toggle filter section on mobile
-    filterToggle.addEventListener('click', function() {
-        filterSection.classList.toggle('show');
-        this.innerHTML = filterSection.classList.contains('show') ? 
-            '<i class="fas fa-times"></i> Hide Filters' : 
-            '<i class="fas fa-sliders-h"></i> Show Filters';
-    });
-
-    // Display all apartments on page load
-    displayApartments(apartments);
-
-    // Apply filters when button is clicked
-    applyFilters.addEventListener('click', filterApartments);
-
-    // Reset filters when button is clicked
-    resetFilters.addEventListener('click', function() {
-        minPrice.value = '';
-        maxPrice.value = '';
-        bedroomsSelect.value = '';
-        locationSelect.value = '';
-        amenityCheckboxes.forEach(checkbox => checkbox.checked = false);
-        searchInput.value = '';
-        displayApartments(apartments);
-    });
-
-    // Filter apartments when search input changes
-    searchInput.addEventListener('input', filterApartments);
-
-    // Function to display apartments
-    function displayApartments(apartmentsToDisplay) {
-        apartmentsContainer.innerHTML = '';
-        
-        if (apartmentsToDisplay.length === 0) {
-            noResults.classList.remove('hidden');
-        } else {
-            noResults.classList.add('hidden');
-            
-            apartmentsToDisplay.forEach(apartment => {
-                const apartmentCard = createApartmentCard(apartment);
-                apartmentsContainer.appendChild(apartmentCard);
-            });
-        }
-    }
-
-    // Function to create apartment card
-    function createApartmentCard(apartment) {
-        const col = document.createElement('div');
-        col.className = 'apartment-item';
-        
-        // Create amenity badges HTML
-        let amenitiesBadges = '';
-        apartment.amenities.forEach(amenity => {
-            let icon = '';
-            switch(amenity) {
-                case 'wifi': icon = 'fa-wifi'; break;
-                case 'parking': icon = 'fa-car'; break;
-                case 'ac': icon = 'fa-snowflake'; break;
-                case 'laundry': icon = 'fa-washing-machine'; break;
-                case 'gym': icon = 'fa-dumbbell'; break;
-                default: icon = 'fa-check';
-            }
-            
-            amenitiesBadges += `
-                <span class="amenity-badge">
-                    <i class="fas ${icon}"></i> ${amenity.charAt(0).toUpperCase() + amenity.slice(1)}
-                </span>
-            `;
-        });
-        
-        col.innerHTML = `
-            <div class="apartment-card">
-                <div class="apartment-image" style="background-image: url('${apartment.imageUrl}')">
-                    <div class="price-badge">$${apartment.price}/mo</div>
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <h5>StudentHomes</h5>
+                        <p>Finding the perfect student accommodation made easy since 2010.</p>
+                    </div>
+                    <div class="footer-col">
+                        <h5>Quick Links</h5>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Rentals</a></li>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h5>Popular Areas</h5>
+                        <ul>
+                            <li><a href="#">Downtown</a></li>
+                            <li><a href="#">Near Campus</a></li>
+                            <li><a href="#">West Side</a></li>
+                            <li><a href="#">East Side</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h5>Contact Us</h5>
+                        <address>
+                            <p>123 University Ave</p>
+                            <p>College Town, ST 12345</p>
+                            <p>Email: info@studenthomes.com</p>
+                            <p>Phone: (123) 456-7890</p>
+                        </address>
+                    </div>
                 </div>
-                <div class="apartment-details">
-                    <h3 class="apartment-title">${apartment.title}</h3>
-                    <div class="apartment-location">
-                        <i class="fas fa-map-marker-alt"></i> ${apartment.location}
-                    </div>
-                    <div class="apartment-features">
-                        <div class="feature">
-                            <i class="fas fa-bed"></i> ${apartment.bedrooms} ${apartment.bedrooms === 1 ? 'Bed' : 'Beds'}
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-bath"></i> ${apartment.bathrooms} ${apartment.bathrooms === 1 ? 'Bath' : 'Baths'}
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-vector-square"></i> ${apartment.size} m²
-                        </div>
-                    </div>
-                    <div class="amenities">
-                        ${amenitiesBadges}
-                    </div>
-   <a href="../html/details.html"> <button class="btn btn-primary" style="width: 100%;">View Details</button></a>
+                <div class="footer-bottom">
+                    <p>&copy; <span id="currentYear"></span> StudentHomes. All rights reserved.</p>
                 </div>
             </div>
-        `;
-        
-        return col;
-    }
+        </footer>
+    </div>
 
-    // Function to filter apartments
-    function filterApartments() {
-        const searchTerm = searchInput.value.toLowerCase();
-        const minPriceValue = minPrice.value ? parseInt(minPrice.value) : 0;
-        const maxPriceValue = maxPrice.value ? parseInt(maxPrice.value) : Infinity;
-        const bedroomsValue = bedroomsSelect.value;
-        const locationValue = locationSelect.value;
-        
-        // Get selected amenities
-        const selectedAmenities = [];
-        amenityCheckboxes.forEach(checkbox => {
-            if (checkbox.checked) {
-                selectedAmenities.push(checkbox.value);
+    <script>
+        // Sample apartment data
+        const apartments = [
+            {
+                id: 1,
+                title: 'Modern Studio Apartment',
+                price: 650,
+                location: 'Downtown',
+                bedrooms: 1,
+                bathrooms: 1,
+                size: 35,
+                amenities: ['wifi', 'ac', 'laundry'],
+                imageUrl: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80',
+                available: true
+            },
+            {
+                id: 2,
+                title: 'Spacious 2-Bedroom Flat',
+                price: 850,
+                location: 'Near Campus',
+                bedrooms: 2,
+                bathrooms: 1,
+                size: 65,
+                amenities: ['wifi', 'parking', 'ac', 'gym'],
+                imageUrl: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80',
+                available: true
+            },
+            {
+                id: 3,
+                title: 'Cozy 1-Bedroom Apartment',
+                price: 700,
+                location: 'East Side',
+                bedrooms: 1,
+                bathrooms: 1,
+                size: 45,
+                amenities: ['wifi', 'parking', 'laundry'],
+                imageUrl: 'https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80',
+                available: true
+            },
+            {
+                id: 4,
+                title: 'Luxury 3-Bedroom House',
+                price: 1200,
+                location: 'West Side',
+                bedrooms: 3,
+                bathrooms: 2,
+                size: 90,
+                amenities: ['wifi', 'parking', 'ac', 'laundry', 'gym'],
+                imageUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80',
+                available: true
+            },
+            {
+                id: 5,
+                title: 'Budget Studio for Students',
+                price: 550,
+                location: 'Near Campus',
+                bedrooms: 1,
+                bathrooms: 1,
+                size: 30,
+                amenities: ['wifi', 'laundry'],
+                imageUrl: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80',
+                available: true
+            },
+            {
+                id: 6,
+                title: 'Shared 4-Bedroom Apartment',
+                price: 450,
+                location: 'Downtown',
+                bedrooms: 4,
+                bathrooms: 2,
+                size: 100,
+                amenities: ['wifi', 'parking', 'ac', 'laundry', 'gym'],
+                imageUrl: 'https://images.unsplash.com/photo-1574362848149-11496d93a7c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80',
+                available: true
+            }
+        ];
+
+        // DOM elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Loading screen elements
+            const loadingScreen = document.getElementById('loading-screen');
+            const progressBar = document.getElementById('progress-bar');
+            const pageContent = document.getElementById('page-content');
+            const windowGrid = document.getElementById('window-grid');
+            const mainBuilding = document.getElementById('main-building');
+            
+            // Create windows for main building
+            for (let i = 0; i < 15; i++) {
+                const window = document.createElement('div');
+                window.classList.add('window');
+                windowGrid.appendChild(window);
+            }
+            
+            // Create windows for other buildings
+            function createWindowsForBuilding(buildingId, rows, cols) {
+                const building = document.getElementById(buildingId);
+                if (!building) return;
+                
+                const buildingWidth = building.offsetWidth;
+                const buildingHeight = building.offsetHeight;
+                const windowWidth = (buildingWidth / (cols + 1)) * 0.8; // Make windows slightly smaller
+                const windowHeight = windowWidth * 1.2; // Slightly taller than wide
+                
+                for (let row = 0; row < rows; row++) {
+                    for (let col = 0; col < cols; col++) {
+                        const window = document.createElement('div');
+                        window.classList.add('window');
+                        window.style.width = `${windowWidth}px`;
+                        window.style.height = `${windowHeight}px`;
+                        window.style.left = `${(col + 0.5) * (buildingWidth / cols)}px`;
+                        window.style.top = `${(row + 1) * (buildingHeight / (rows + 2))}px`;
+                        // Add transform to center windows horizontally
+                        window.style.transform = 'translateX(-50%)';
+                        building.appendChild(window);
+                    }
+                }
+            }
+            
+            // Create windows for each building with appropriate number of rows and columns
+            setTimeout(() => {
+                createWindowsForBuilding('building-1', 3, 2); // Small building
+                createWindowsForBuilding('building-2', 4, 2); // Medium building
+                createWindowsForBuilding('building-3', 3, 3); // Medium building
+                createWindowsForBuilding('building-4', 5, 3); // Tall building
+                createWindowsForBuilding('building-5', 3, 2); // Small building
+            }, 1000);
+            
+            // Get all windows
+            const getAllWindows = () => document.querySelectorAll('.window');
+            
+            // Set loading duration to 3 seconds
+            const loadingDuration = 3000;
+            const startTime = Date.now();
+            const endTime = startTime + loadingDuration;
+            
+            // Update frequency
+            const updateInterval = 40; // milliseconds
+            
+            // Light up windows in sequence with precise timing
+            const updateProgress = () => {
+                const currentTime = Date.now();
+                const elapsedTime = currentTime - startTime;
+                
+                // Calculate progress percentage (0-100)
+                const progress = Math.min(Math.floor((elapsedTime / loadingDuration) * 100), 100);
+                
+                // Update progress bar
+                progressBar.style.width = `${progress}%`;
+                
+                // Get all windows (including newly created ones)
+                const allWindows = getAllWindows();
+                
+                // Calculate how many windows to light up
+                const windowsToLight = Math.floor((progress / 100) * allWindows.length);
+                
+                // Light up windows randomly
+                const unlitWindows = Array.from(allWindows).filter(window => !window.classList.contains('lit'));
+                
+                for (let i = 0; i < windowsToLight - (allWindows.length - unlitWindows.length); i++) {
+                    if (unlitWindows.length > 0) {
+                        const randomIndex = Math.floor(Math.random() * unlitWindows.length);
+                        unlitWindows[randomIndex].classList.add('lit');
+                        unlitWindows.splice(randomIndex, 1);
+                    }
+                }
+                
+                // Check if loading is complete
+                if (currentTime < endTime) {
+                    // Continue updating
+                    setTimeout(updateProgress, updateInterval);
+                } else {
+                    // Loading complete
+                    progressBar.style.width = '100%';
+                    
+                    // Light up all remaining windows with a wave effect
+                    const remainingWindows = Array.from(allWindows).filter(window => !window.classList.contains('lit'));
+                    remainingWindows.forEach((window, index) => {
+                        setTimeout(() => {
+                            window.classList.add('lit');
+                        }, index * 20);
+                    });
+                    
+                    // Show main content after a short delay
+                    setTimeout(() => {
+                        loadingScreen.style.opacity = 0;
+                        loadingScreen.style.transform = 'translateY(-20px)';
+                        
+                        setTimeout(() => {
+                            pageContent.style.opacity = 1;
+                            loadingScreen.style.display = 'none';
+                        }, 300);
+                    }, 300);
+                }
+            };
+            
+            // Start the progress updates
+            updateProgress();
+            
+            // Add interactive elements
+            const buildings = document.querySelectorAll('.building');
+            buildings.forEach(building => {
+                building.addEventListener('mouseenter', () => {
+                    building.style.transform = 'translateY(-5px)';
+                });
+                
+                building.addEventListener('mouseleave', () => {
+                    building.style.transform = 'translateY(0)';
+                });
+                
+                // Add click event to toggle windows in this building
+                building.addEventListener('click', () => {
+                    const buildingWindows = building.querySelectorAll('.window');
+                    buildingWindows.forEach((window, index) => {
+                        setTimeout(() => {
+                            window.classList.toggle('lit');
+                        }, index * 15);
+                    });
+                });
+            });
+            
+            // Add click event to main building for wave effect
+            mainBuilding.addEventListener('click', () => {
+                const mainWindows = mainBuilding.querySelectorAll('.window');
+                mainWindows.forEach((window, index) => {
+                    setTimeout(() => {
+                        window.classList.toggle('lit');
+                    }, index * 15);
+                });
+                
+                // Toggle them back after a short delay
+                setTimeout(() => {
+                    mainWindows.forEach((window, index) => {
+                        setTimeout(() => {
+                            window.classList.toggle('lit');
+                        }, index * 15);
+                    });
+                }, 300);
+            });
+
+            // Apartment listing functionality
+            const apartmentsContainer = document.getElementById('apartmentsContainer');
+            const noResults = document.getElementById('noResults');
+            const searchInput = document.getElementById('searchInput');
+            const filterToggle = document.getElementById('filterToggle');
+            const filterSection = document.getElementById('filterSection');
+            const applyFilters = document.getElementById('applyFilters');
+            const resetFilters = document.getElementById('resetFilters');
+            const minPrice = document.getElementById('minPrice');
+            const maxPrice = document.getElementById('maxPrice');
+            const bedroomsSelect = document.getElementById('bedrooms');
+            const locationSelect = document.getElementById('location');
+            const amenityCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+            const navbarToggle = document.getElementById('navbarToggle');
+            const navbarMenu = document.getElementById('navbarMenu');
+            
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Toggle navigation menu on mobile
+            navbarToggle.addEventListener('click', function() {
+                navbarMenu.classList.toggle('active');
+            });
+
+            // Toggle filter section on mobile
+            filterToggle.addEventListener('click', function() {
+                filterSection.classList.toggle('show');
+                this.innerHTML = filterSection.classList.contains('show') ? 
+                    '<i class="fas fa-times"></i> Hide Filters' : 
+                    '<i class="fas fa-sliders-h"></i> Show Filters';
+            });
+
+            // Display all apartments on page load
+            displayApartments(apartments);
+
+            // Apply filters when button is clicked
+            applyFilters.addEventListener('click', filterApartments);
+
+            // Reset filters when button is clicked
+            resetFilters.addEventListener('click', function() {
+                minPrice.value = '';
+                maxPrice.value = '';
+                bedroomsSelect.value = '';
+                locationSelect.value = '';
+                amenityCheckboxes.forEach(checkbox => checkbox.checked = false);
+                searchInput.value = '';
+                displayApartments(apartments);
+            });
+
+            // Filter apartments when search input changes
+            searchInput.addEventListener('input', filterApartments);
+
+            // Function to display apartments
+            function displayApartments(apartmentsToDisplay) {
+                apartmentsContainer.innerHTML = '';
+                
+                if (apartmentsToDisplay.length === 0) {
+                    noResults.classList.remove('hidden');
+                } else {
+                    noResults.classList.add('hidden');
+                    
+                    apartmentsToDisplay.forEach(apartment => {
+                        const apartmentCard = createApartmentCard(apartment);
+                        apartmentsContainer.appendChild(apartmentCard);
+                    });
+                }
+            }
+
+            // Function to create apartment card
+            function createApartmentCard(apartment) {
+                const col = document.createElement('div');
+                col.className = 'apartment-item';
+                
+                // Create amenity badges HTML
+                let amenitiesBadges = '';
+                apartment.amenities.forEach(amenity => {
+                    let icon = '';
+                    switch(amenity) {
+                        case 'wifi': icon = 'fa-wifi'; break;
+                        case 'parking': icon = 'fa-car'; break;
+                        case 'ac': icon = 'fa-snowflake'; break;
+                        case 'laundry': icon = 'fa-washing-machine'; break;
+                        case 'gym': icon = 'fa-dumbbell'; break;
+                        default: icon = 'fa-check';
+                    }
+                    
+                    amenitiesBadges += `
+                        <span class="amenity-badge">
+                            <i class="fas ${icon}"></i> ${amenity.charAt(0).toUpperCase() + amenity.slice(1)}
+                        </span>
+                    `;
+                });
+                
+                col.innerHTML = `
+                    <div class="apartment-card">
+                        <div class="apartment-image" style="background-image: url('${apartment.imageUrl}')">
+                            <div class="price-badge">$${apartment.price}/mo</div>
+                        </div>
+                        <div class="apartment-details">
+                            <h3 class="apartment-title">${apartment.title}</h3>
+                            <div class="apartment-location">
+                                <i class="fas fa-map-marker-alt"></i> ${apartment.location}
+                            </div>
+                            <div class="apartment-features">
+                                <div class="feature">
+                                    <i class="fas fa-bed"></i> ${apartment.bedrooms} ${apartment.bedrooms === 1 ? 'Bed' : 'Beds'}
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-bath"></i> ${apartment.bathrooms} ${apartment.bathrooms === 1 ? 'Bath' : 'Baths'}
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-vector-square"></i> ${apartment.size} m²
+                                </div>
+                            </div>
+                            <div class="amenities">
+                                ${amenitiesBadges}
+                            </div>
+                            <a href="../html/details.html"> <button class="btn btn-primary" style="width: 100%;">View Details</button></a>
+                        </div>
+                    </div>
+                `;
+                
+                return col;
+            }
+
+            // Function to filter apartments
+            function filterApartments() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const minPriceValue = minPrice.value ? parseInt(minPrice.value) : 0;
+                const maxPriceValue = maxPrice.value ? parseInt(maxPrice.value) : Infinity;
+                const bedroomsValue = bedroomsSelect.value;
+                const locationValue = locationSelect.value;
+                
+                // Get selected amenities
+                const selectedAmenities = [];
+                amenityCheckboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        selectedAmenities.push(checkbox.value);
+                    }
+                });
+                
+                const filteredApartments = apartments.filter(apartment => {
+                    // Search term filter
+                    const matchesSearch = searchTerm === '' || 
+                        apartment.title.toLowerCase().includes(searchTerm) || 
+                        apartment.location.toLowerCase().includes(searchTerm);
+                    
+                    // Price range filter
+                    const matchesPrice = apartment.price >= minPriceValue && apartment.price <= maxPriceValue;
+                    
+                    // Bedrooms filter
+                    const matchesBedrooms = bedroomsValue === '' || apartment.bedrooms.toString() === bedroomsValue;
+                    
+                    // Location filter
+                    const matchesLocation = locationValue === '' || apartment.location === locationValue;
+                    
+                    // Amenities filter
+                    const matchesAmenities = selectedAmenities.length === 0 || 
+                        selectedAmenities.every(amenity => apartment.amenities.includes(amenity));
+                    
+                    return matchesSearch && matchesPrice && matchesBedrooms && matchesLocation && matchesAmenities;
+                });
+                
+                displayApartments(filteredApartments);
             }
         });
-        
-        const filteredApartments = apartments.filter(apartment => {
-            // Search term filter
-            const matchesSearch = searchTerm === '' || 
-                apartment.title.toLowerCase().includes(searchTerm) || 
-                apartment.location.toLowerCase().includes(searchTerm);
-            
-            // Price range filter
-            const matchesPrice = apartment.price >= minPriceValue && apartment.price <= maxPriceValue;
-            
-            // Bedrooms filter
-            const matchesBedrooms = bedroomsValue === '' || apartment.bedrooms.toString() === bedroomsValue;
-            
-            // Location filter
-            const matchesLocation = locationValue === '' || apartment.location === locationValue;
-            
-            // Amenities filter
-            const matchesAmenities = selectedAmenities.length === 0 || 
-                selectedAmenities.every(amenity => apartment.amenities.includes(amenity));
-            
-            return matchesSearch && matchesPrice && matchesBedrooms && matchesLocation && matchesAmenities;
-        });
-        
-        displayApartments(filteredApartments);
-    }
-});
     </script>
-
 </body>
 </html>
+
