@@ -1271,6 +1271,17 @@
                 font-size: 2rem;
             }
         }
+        
+        /* Typewriter Effect Styles */
+        .cursor {
+            animation: blinker 1s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
     </style>
   </head>
 
@@ -1359,8 +1370,8 @@
     <!-- Hero Section -->
     <section class="hero-section">
       <div class="container">
-        <h1>Find Your Perfect Student Accommodation</h1>
-        <p class="lead">
+        <h1 id="hero-title">Find Your Perfect Student Accommodation</h1>
+        <p class="lead" id="hero-subtitle">
           Thousands of verified properties near top universities
         </p>
 
@@ -1720,7 +1731,7 @@
             </div>
           </div>
         </div>
-        <hr />
+        <hr>
         <div class="footer-bottom">
           <p>© 2023 StudentHomes. All rights reserved.</p>
           <div class="footer-legal">
@@ -1731,8 +1742,8 @@
         </div>
       </div>
     </footer>
-
-    <script>
+  </body>
+ <script>
       // Mobile menu toggle
       document.addEventListener("DOMContentLoaded", function () {
         const menuToggle = document.getElementById("menu-toggle");
@@ -1797,12 +1808,7 @@
           });
         });
       });
-    </script>
-  </body>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-  // Hide navbar during loading
+      // Hide navbar during loading
   const navbar = document.querySelector('.navbar');
   if (navbar) {
     navbar.style.display = 'none';
@@ -1983,7 +1989,51 @@ const loadingDuration = 3000; // 3 seconds
           });
       }, 300);
   });
-});
-  </script>
-</html>
+  // Apply typewriter effect to hero title and subtitle
+function applyTypewriterEffect(elementId) {
+  const element = document.getElementById(elementId);
+  if (!element) return;
+  
+  // Get the original text from the element
+  const originalText = element.textContent;
+  
+  // Clear the element to start fresh
+  element.textContent = "";
+  
+  let textPosition = 0;
+  const speed = 100; // Typing speed in milliseconds
+  
+  // Function to type each character
+  function typeCharacter() {
+    if (textPosition < originalText.length) {
+      element.innerHTML = 
+        originalText.substring(0, textPosition + 1) + 
+        "<span class='cursor'>&#9646;</span>";
+      textPosition++;
+      setTimeout(typeCharacter, speed);
+    } else {
+      // When typing is complete, just show the cursor at the end
+      element.innerHTML = 
+        originalText + "<span class='cursor'>&#9646;</span>";
+    }
+  }
+  
+  // Start the typing effect
+  typeCharacter();
+}
 
+// Apply typewriter effect to hero title and subtitle when loading is complete
+setTimeout(() => {
+  applyTypewriterEffect('hero-title');
+  
+  // Apply to subtitle after title is complete
+  setTimeout(() => {
+    applyTypewriterEffect('hero-subtitle');
+  }, 3000); // Start subtitle after title (approx 3 seconds)
+}, 3500); // Start after loading screen is gone
+
+    </script>
+</html>
+  
+   
+  

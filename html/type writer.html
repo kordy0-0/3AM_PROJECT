@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typewriter Effect</title>
+    <style>
+      .cursor {
+        animation: blinker 1s linear infinite;
+      }
+
+      @keyframes blinker {
+        50% {
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <p id="message">This text will be replaced with a typewriter effect</p>
+
+    <script>
+      // Function to apply typewriter effect to any element with id="message"
+      function typewriterEffect() {
+        const element = document.getElementById("message");
+
+        // Get the original text from the element
+        const originalText = element.textContent;
+
+        // Clear the element to start fresh
+        element.textContent = "";
+
+        let textPosition = 0;
+        const speed = 100; // Typing speed in milliseconds
+
+        // Function to type each character
+        function typeCharacter() {
+          if (textPosition < originalText.length) {
+            element.innerHTML =
+              originalText.substring(0, textPosition + 1) +
+              "<span class='cursor'>&#9646;</span>";
+            textPosition++;
+            setTimeout(typeCharacter, speed);
+          } else {
+            // When typing is complete, just show the cursor at the end
+            element.innerHTML =
+              originalText + "<span class='cursor'>&#9646;</span>";
+          }
+        }
+
+        // Start the typing effect
+        typeCharacter();
+      }
+
+      // Run the effect when the page loads
+      window.addEventListener("load", typewriterEffect);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Subscription Plans</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .tagline {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .plans-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .plan {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .plan:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .plan-header {
+            padding: 25px 20px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .free-plan .plan-header {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .basic-plan .plan-header {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .premium-plan .plan-header {
+            background-color: #9b59b6;
+            color: white;
+        }
+        
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 15px 0;
+        }
+        
+        .price-period {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        .plan-features {
+            padding: 30px 20px;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .feature-icon {
+            margin-right: 10px;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .cta {
+            padding: 0 20px 30px;
+            text-align: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        .btn-free {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-basic {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .btn-premium {
+            background-color: #9b59b6;
+            color: white;
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+        
+        .popular-badge {
+            background-color: #e74c3c;
+            color: white;
+            font-size: 0.8rem;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .features-comparison {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin-top: 40px;
+        }
+        
+        .comparison-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+        
+        .student-testimonials {
+            margin-top: 60px;
+            text-align: center;
+        }
+        
+        .testimonial {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .student-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-top: 10px;
+        }
+        
+        .student-info {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .special-offer {
+            text-align: center;
+            margin: 50px 0;
+            padding: 30px;
+            background-color: #f1c40f;
+            border-radius: 10px;
+            color: #2c3e50;
+        }
+        
+        .offer-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Student Success Subscription</h1>
+            <p class="tagline">Unlock your academic potential with resources designed specifically for students</p>
+        </header>
+
+        <div class="plans-container">
+            <!-- Free Plan -->
+            <div class="plan free-plan">
+                <div class="plan-header">
+                    <div class="plan-name">Free</div>
+                    <div class="plan-price">$0<span class="price-period">/month</span></div>
+                    <p>Get started with basic features</p>
+                </div>
+                <div class="plan-features">
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>Basic study materials</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>5 practice quizzes per month</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>Community forum access</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>Email support</span>
+                    </div>
+                </div>
+                <div class="cta">
+                    <button class="btn btn-free">Sign Up Free</button>
+                </div>
+            </div>
+
+            <!-- Basic Plan -->
+            <div class="plan basic-plan">
+                <div class="plan-header">
+                    <span class="popular-badge">Most Popular</span>
+                    <div class="plan-name">Student Basic</div>
+                    <div class="plan-price">$9.99<span class="price-period">/month</span></div>
+                    <p>Perfect for most students</p>
+                </div>
+                <div class="plan-features">
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>All Free plan features</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>Unlimited practice quizzes</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>Study guides for 20+ subjects</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>Assignment planner tool</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>Priority email support</span>
+                    </div>
+                </div>
+                <div class="cta">
+                    <button class="btn btn-basic">Start 7-Day Free Trial</button>
+                </div>
+            </div>
+
+            <!-- Premium Plan -->
+            <div class="plan premium-plan">
+                <div class="plan-header">
+                    <div class="plan-name">Student Premium</div>
+                    <div class="plan-price">$19.99<span class="price-period">/month</span></div>
+                    <p>For serious academic achievers</p>
+                </div>
+                <div class="plan-features">
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>All Basic plan features</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>1-on-1 tutoring (2hrs/month)</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>Advanced study materials</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>Essay review & feedback</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>AI study assistant</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>24/7 priority support</span>
+                    </div>
+                </div>
+                <div class="cta">
+                    <button class="btn btn-premium">Start 7-Day Free Trial</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="special-offer">
+            <h2 class="offer-title">Special Student Offer!</h2>
+            <p>Get 20% off any annual subscription with verified student ID</p>
+            <p>Use code: <strong>STUDENT20</strong> at checkout</p>
+        </div>
+
+        <div class="student-testimonials">
+            <h2 class="comparison-title">What Students Say</h2>
+            <div class="testimonial">
+                <p>"This subscription completely transformed my study habits. The assignment planner helped me stay on track and improve my grades significantly!"</p>
+                <p class="student-name">Jamie Lewis</p>
+                <p class="student-info">Computer Science Major, Junior Year</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 Student Success Platform. All rights reserved.</p>
+            <p>Questions? Contact us at support@studentplatform.com</p>
+        </footer>
+    </div>
+
+    <script>
+        // Simple animation for pricing plans
+        document.addEventListener('DOMContentLoaded', function() {
+            const plans = document.querySelectorAll('.plan');
+            
+            plans.forEach(plan => {
+                plan.addEventListener('mouseover', function() {
+                    this.style.transform = 'translateY(-10px)';
+                    this.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.15)';
+                });
+                
+                plan.addEventListener('mouseout', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
