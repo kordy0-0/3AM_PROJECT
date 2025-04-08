@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+ 
+  <style>
+    #overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#modal {
+  max-width: 600px;
+  height: 300px;
+  margin: auto;
+  background-color: white;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.website-content {height: 1000vh;}
+  </style>
+</head>
+<body>
+  <button id="show-modal-btn">Show Modal</button>
+<div id="overlay">
+  <div id="modal">
+    <div class="container">
+      <h1>Hello</h1>
+    </div>
+  </div>
+  <button id="close-modal-btn">Close Modal</button>
+</div>
+  <div class="container">
+    <h1>Hello</h1>
+
+  <div class="website-content"></div> 
+  <script >
+const overlay = document.querySelector("#overlay")
+
+document.querySelector("#show-modal-btn").addEventListener("click", () => {
+  overlay.style.display = "block";
+})
+
+document.querySelector("#close-modal-btn").addEventListener("click", () => {
+  overlay.style.display = "none";
+})
+
+
+
+
+
+
+
+  </script>
+
+</body>
+</html>
