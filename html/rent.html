@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Housing Rentals</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
     <style>
         :root {
     --primary-color: #0d6efd;
@@ -952,9 +951,143 @@ footer {
 .favorite-btn.active i {
     animation: favoriteAnimation 0.3s forwards;
 }
+
+/* Modal Styles from the first code */
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9998;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#modal {
+    max-width: 600px;
+    height: auto;
+    min-height: 300px;
+    margin: auto;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-lg);
+    padding: 2rem;
+    overflow: auto;
+}
+
+#close-modal-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--gray);
+    transition: color 0.3s ease;
+}
+
+#close-modal-btn:hover {
+    color: var(--dark);
+}
+
+.apartment-modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.apartment-modal-image {
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 0.5rem;
+}
+
+.apartment-modal-details h2 {
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.apartment-modal-location {
+    display: flex;
+    align-items: center;
+    color: var(--gray);
+    margin-bottom: 1.5rem;
+}
+
+.apartment-modal-location i {
+    margin-right: 0.5rem;
+}
+
+.apartment-modal-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.apartment-modal-feature {
+    display: flex;
+    align-items: center;
+}
+
+.apartment-modal-feature i {
+    margin-right: 0.5rem;
+    color: var(--primary-color);
+}
+
+.apartment-modal-description {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.apartment-modal-amenities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.apartment-modal-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.apartment-modal-price {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    #modal {
+        width: 90%;
+        max-height: 80vh;
+    }
+}
     </style>
 </head>
 <body>
+    <!-- Modal Overlay -->
+    <div id="overlay">
+        <div id="modal">
+            <button id="close-modal-btn"><i class="fas fa-times"></i></button>
+            <div id="modal-content" class="apartment-modal-content">
+                <!-- Modal content will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
     <!-- Loading Screen -->
     <div class="loading-screen" id="loading-screen">
         <div class="city-scene">
@@ -1183,6 +1316,7 @@ footer {
                 size: 35,
                 amenities: ['wifi', 'ac', 'laundry'],
                 imageUrl: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80',
+                description: 'A modern studio apartment in the heart of downtown. Perfect for students who want to be close to nightlife and restaurants.',
                 available: true
             },
             {
@@ -1195,6 +1329,7 @@ footer {
                 size: 65,
                 amenities: ['wifi', 'parking', 'ac', 'gym'],
                 imageUrl: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80',
+                description: 'A spacious 2-bedroom apartment just a 5-minute walk from campus. Includes access to a gym and parking.',
                 available: true
             },
             {
@@ -1207,6 +1342,7 @@ footer {
                 size: 45,
                 amenities: ['wifi', 'parking', 'laundry'],
                 imageUrl: 'https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80',
+                description: 'A cozy 1-bedroom apartment on the East Side. Quiet neighborhood with easy access to public transportation.',
                 available: true
             },
             {
@@ -1219,6 +1355,7 @@ footer {
                 size: 90,
                 amenities: ['wifi', 'parking', 'ac', 'laundry', 'gym'],
                 imageUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80',
+                description: 'A luxury 3-bedroom house on the West Side. Perfect for a group of students looking for a high-end living experience.',
                 available: true
             },
             {
@@ -1231,6 +1368,7 @@ footer {
                 size: 30,
                 amenities: ['wifi', 'laundry'],
                 imageUrl: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80',
+                description: 'An affordable studio apartment near campus. Basic amenities with a focus on functionality and convenience.',
                 available: true
             },
             {
@@ -1243,6 +1381,7 @@ footer {
                 size: 100,
                 amenities: ['wifi', 'parking', 'ac', 'laundry', 'gym'],
                 imageUrl: 'https://images.unsplash.com/photo-1574362848149-11496d93a7c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80',
+                description: 'A shared 4-bedroom apartment in downtown. Great for students who want to split costs while enjoying premium amenities.',
                 available: true
             }
         ];
@@ -1258,6 +1397,12 @@ footer {
             const pageContent = document.getElementById('page-content');
             const windowGrid = document.getElementById('window-grid');
             const mainBuilding = document.getElementById('main-building');
+            
+            // Modal elements
+            const overlay = document.getElementById('overlay');
+            const modal = document.getElementById('modal');
+            const modalContent = document.getElementById('modal-content');
+            const closeModalBtn = document.getElementById('close-modal-btn');
             
             // Create windows for main building
             for (let i = 0; i < 15; i++) {
@@ -1464,6 +1609,75 @@ footer {
             // Filter apartments when search input changes
             searchInput.addEventListener('input', filterApartments);
 
+            // Modal functionality
+            function showModal(apartment) {
+                // Create modal content
+                let amenitiesBadges = '';
+                apartment.amenities.forEach(amenity => {
+                    let icon = '';
+                    switch(amenity) {
+                        case 'wifi': icon = 'fa-wifi'; break;
+                        case 'parking': icon = 'fa-car'; break;
+                        case 'ac': icon = 'fa-snowflake'; break;
+                        case 'laundry': icon = 'fa-washing-machine'; break;
+                        case 'gym': icon = 'fa-dumbbell'; break;
+                        default: icon = 'fa-check';
+                    }
+                    
+                    amenitiesBadges += `
+                        <span class="amenity-badge">
+                            <i class="fas ${icon}"></i> ${amenity.charAt(0).toUpperCase() + amenity.slice(1)}
+                        </span>
+                    `;
+                });
+                
+                modalContent.innerHTML = `
+                    <div class="apartment-modal-image" style="background-image: url('${apartment.imageUrl}')"></div>
+                    <div class="apartment-modal-details">
+                        <h2>${apartment.title}</h2>
+                        <div class="apartment-modal-location">
+                            <i class="fas fa-map-marker-alt"></i> ${apartment.location}
+                        </div>
+                        <div class="apartment-modal-features">
+                            <div class="apartment-modal-feature">
+                                <i class="fas fa-bed"></i> ${apartment.bedrooms} ${apartment.bedrooms === 1 ? 'Bedroom' : 'Bedrooms'}
+                            </div>
+                            <div class="apartment-modal-feature">
+                                <i class="fas fa-bath"></i> ${apartment.bathrooms} ${apartment.bathrooms === 1 ? 'Bathroom' : 'Bathrooms'}
+                            </div>
+                            <div class="apartment-modal-feature">
+                                <i class="fas fa-vector-square"></i> ${apartment.size} m²
+                            </div>
+                        </div>
+                        <div class="apartment-modal-description">
+                            ${apartment.description}
+                        </div>
+                        <div class="apartment-modal-amenities">
+                            ${amenitiesBadges}
+                        </div>
+                        <div class="apartment-modal-actions">
+                            <div class="apartment-modal-price">$${apartment.price}/month</div>
+                            <button class="btn btn-primary">Learn More</button>
+                        </div>
+                    </div>
+                `;
+                
+                // Show the modal
+                overlay.style.display = "block";
+            }
+            
+            // Close modal when close button is clicked
+            closeModalBtn.addEventListener('click', () => {
+                overlay.style.display = "none";
+            });
+            
+            // Close modal when clicking outside the modal
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.style.display = "none";
+                }
+            });
+
             // Function to toggle favorite status
             function toggleFavorite(apartmentId) {
                 const index = favorites.indexOf(apartmentId);
@@ -1567,19 +1781,33 @@ footer {
                             <div class="amenities">
                                 ${amenitiesBadges}
                             </div>
-                            <a href="../html/details.html"> <button class="btn btn-primary" style="width: 100%;">View Details</button></a>
+                            <button class="btn btn-primary view-details-btn" data-id="${apartment.id}" style="width: 100%;">View Details</button>
                         </div>
                     </div>
                 `;
                 
-                // Add event listener to favorite button
+                // Add event listeners
                 setTimeout(() => {
+                    // Add event listener to favorite button
                     const favoriteBtn = col.querySelector('.favorite-btn');
                     if (favoriteBtn) {
                         favoriteBtn.addEventListener('click', function(e) {
                             e.preventDefault();
                             const apartmentId = parseInt(this.getAttribute('data-id'));
                             toggleFavorite(apartmentId);
+                        });
+                    }
+                    
+                    // Add event listener to view details button
+                    const viewDetailsBtn = col.querySelector('.view-details-btn');
+                    if (viewDetailsBtn) {
+                        viewDetailsBtn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const apartmentId = parseInt(this.getAttribute('data-id'));
+                            const apartment = apartments.find(apt => apt.id === apartmentId);
+                            if (apartment) {
+                                showModal(apartment);
+                            }
                         });
                     }
                 }, 0);
@@ -1630,4 +1858,4 @@ footer {
         });
     </script>
 </body>
-</html>
+</html>+
