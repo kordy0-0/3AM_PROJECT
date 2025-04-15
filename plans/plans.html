@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Subscription Plans</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../plans/plans.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar hidden" id="navbar">
+      <div class="container">
+        <a class="navbar-brand" href="../html/home.html">StudentHomes</a>
+        <button
+          class="navbar-toggler"
+          id="menu-toggle"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="navbar-menu" id="navbarMenu">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="../html/home.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../html/rent.html">Properties</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../html/rent.html">Universities</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../html/about us.html">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../html/contact us .html">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn btn-primary" href="../html/login.html"
+                >Sign In</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <!-- Header Section -->
+      <header>
+        <div class="header-gradient"></div>
+        <h1>Student Success Subscription</h1>
+        <p class="tagline">
+          Unlock your academic potential with resources designed specifically
+          for students
+        </p>
+
+        <!-- Monthly/Annual Toggle -->
+        <div class="toggle-container">
+          <span class="toggle-text monthly active">Monthly</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="billing-toggle" />
+            <span class="slider"></span>
+          </label>
+          <span class="toggle-text annual">Annual</span>
+          <span class="save-text">Save 20%</span>
+        </div>
+      </header>
+
+      <!-- Pricing Plans -->
+      <div class="plans-container">
+        <!-- Free Plan -->
+        <div class="plan free-plan">
+          <div class="plan-header">
+            <div class="plan-name">Free</div>
+            <div class="plan-price monthly">
+              $0<span class="price-period">/month</span>
+            </div>
+            <div class="plan-price annual">
+              $0<span class="price-period">/year</span>
+            </div>
+            <p class="plan-description">Get started with basic features</p>
+          </div>
+          <div class="plan-features">
+            <div class="feature">
+              <span class="feature-icon"><i class="fas fa-check"></i></span>
+              <span class="feature-text">Basic study materials</span>
+            </div>
+            <div class="feature">
+              <span class="feature-icon"><i class="fas fa-check"></i></span>
+              <span class="feature-text">5 practice quizzes per month</span>
+            </div>
+            <div class="feature">
+              <span class="feature-icon"><i class="fas fa-check"></i></span>
+              <span class="feature-text">Community forum access</span>
+            </div>
+            <div class="feature">
+              <span class="feature-icon"><i class="fas fa-check"></i></span>
+              <span class="feature-text">Email support</span>
+            </div>
+          </div>
+          <div class="cta">
+            <button class="btn btn-free">Sign Up Free</button>
+          </div>
+        </div>
+
+        <!-- Basic Plan -->
+        <div class="plan basic-plan">
+          <div class="popular-badge">Most Popular</div>
+          <div class="plan-header">
+            <div class="plan-name">Student Basic</div>
+            <div class="plan-price monthly">
+              $9.99<span class="price-period">/month</span>
+            </div>
+            <div class="plan-price annual">
+              $95.90<span class="price-period">/year</span>
+            </div>
+            <p class="plan-description">Perfect for most students</p>
+          </div>
+          <div class="plan-features">
+            <div class="feature">
+              <span class="feature-icon"><i class="fas fa-check"></i></span>
+              <span class="feature-text">All Free plan features</span>
+            </div>
+            <div class="feature">
+              <span class="feature-icon"><i class="fas fa-check"></i></span>
+              <span class="feature-text">Unlimited practice quizzes</span>
+            </div>
+            <div class="feature">
+              <span class="feature-icon"><i class="fas fa-check"></i></span>
+              <span class="feature-text">Study guides for 20+ subjects</span>
+            </div>
+            <div class="feature">
+              <span class="feature-icon"><i class="fas fa-check"></i></span>
+              <span class="feature-text">Assignment planner tool</span>
+            </div>
+            <div class="feature">
+              <span class="feature-icon"><i class="fas fa-check"></i></span>
+              <span class="feature-text">Priority email support</span>
+            </div>
+          </div>
+          <div class="cta">
+            <button class="btn btn-basic">Start 7-Day Free Trial</button>
+          </div>
+        </div>
+
+        <!-- Premium Plan -->
+        <div class="plan premium-plan">
+          <div class="plan-header">
+            <div class="plan-name">Student Premium</div>
+            <div class="plan-price monthly">
+              $19.99<span class="price-period">/month</span>
+            </div>
+            <div class="plan-price annual">
+              $191.90<span class="price-period">/year</span>
+            </div>
+            <p class="plan-description">For serious academic achievers</p>
+          </div>
+          <div class="plan-features">
+            <div class="feature">
+              <span class="feature-icon"><i class="fas fa-check"></i></span>
+              <span class="feature-text">All Basic plan features</span>
+            </div>
+            <div class="feature">
+              <span class="feature-icon"><i class="fas fa-check"></i></span>
+              <span class="feature-text">1-on-1 tutoring (2hrs/month)</span>
+            </div>
+            <div class="feature">
+              <span class="feature-icon"><i class="fas fa-check"></i></span>
+              <span class="feature-text">Advanced study materials</span>
+            </div>
+            <div class="feature">
+              <span class="feature-icon"><i class="fas fa-check"></i></span>
+              <span class="feature-text">Essay review & feedback</span>
+            </div>
+            <div class="feature">
+              <span class="feature-icon"><i class="fas fa-check"></i></span>
+              <span class="feature-text">AI study assistant</span>
+            </div>
+            <div class="feature">
+              <span class="feature-icon"><i class="fas fa-check"></i></span>
+              <span class="feature-text">24/7 priority support</span>
+            </div>
+          </div>
+          <div class="cta">
+            <button class="btn btn-premium">Start 7-Day Free Trial</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Special Offer Banner -->
+      <div class="special-offer">
+        <h2 class="offer-title">🎓 Special Student Offer!</h2>
+        <p class="offer-description">
+          Get an additional 20% off any annual subscription with verified
+          student ID
+        </p>
+        <p>Use code:</p>
+        <div class="promo-code">STUDENT20</div>
+        <p>Valid for new subscribers through the end of the semester!</p>
+      </div>
+
+      <!-- Features Comparison -->
+      <div class="comparison-section">
+        <h2 class="comparison-title">Plan Comparison</h2>
+        <div style="overflow-x: auto">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Features</th>
+                <th>Free</th>
+                <th>Student Basic</th>
+                <th>Student Premium</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Access to Study Materials</td>
+                <td><i class="fas fa-check"></i> Basic</td>
+                <td><i class="fas fa-check"></i> Advanced</td>
+                <td><i class="fas fa-check"></i> Complete</td>
+              </tr>
+              <tr>
+                <td>Practice Quizzes</td>
+                <td>5/month</td>
+                <td>Unlimited</td>
+                <td>Unlimited</td>
+              </tr>
+              <tr>
+                <td>Study Guides</td>
+                <td>3 subjects</td>
+                <td>20+ subjects</td>
+                <td>All subjects</td>
+              </tr>
+              <tr>
+                <td>Assignment Planner</td>
+                <td><i class="fas fa-times"></i></td>
+                <td><i class="fas fa-check"></i></td>
+                <td><i class="fas fa-check"></i></td>
+              </tr>
+              <tr>
+                <td>Flashcards</td>
+                <td>50 cards</td>
+                <td>Unlimited</td>
+                <td>Unlimited</td>
+              </tr>
+              <tr>
+                <td>1-on-1 Tutoring</td>
+                <td><i class="fas fa-times"></i></td>
+                <td><i class="fas fa-times"></i></td>
+                <td>2hrs/month</td>
+              </tr>
+              <tr>
+                <td>Essay Review</td>
+                <td><i class="fas fa-times"></i></td>
+                <td><i class="fas fa-times"></i></td>
+                <td><i class="fas fa-check"></i></td>
+              </tr>
+              <tr>
+                <td>AI Study Assistant</td>
+                <td><i class="fas fa-times"></i></td>
+                <td><i class="fas fa-times"></i></td>
+                <td><i class="fas fa-check"></i></td>
+              </tr>
+              <tr>
+                <td>Customer Support</td>
+                <td>Email</td>
+                <td>Priority Email</td>
+                <td>24/7 Priority</td>
+              </tr>
+              <tr>
+                <td>Mobile App Access</td>
+                <td><i class="fas fa-check"></i> Limited</td>
+                <td><i class="fas fa-check"></i> Full</td>
+                <td><i class="fas fa-check"></i> Full</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Testimonials -->
+      <div class="student-testimonials">
+        <h2 class="comparison-title">What Students Say</h2>
+        <div class="testimonials-container">
+          <!-- Testimonial 1 -->
+          <div class="testimonial">
+            <div class="testimonial-header">
+              <div class="student-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="student-info">
+                <p class="student-name">Jamie Lewis</p>
+                <p class="student-details">
+                  Computer Science Major, Junior Year
+                </p>
+              </div>
+            </div>
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              "This subscription completely transformed my study habits. The
+              assignment planner helped me stay on track and improve my grades
+              significantly!"
+            </p>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="testimonial">
+            <div class="testimonial-header">
+              <div class="student-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="student-info">
+                <p class="student-name">Sarah Johnson</p>
+                <p class="student-details">Biology Major, Sophomore</p>
+              </div>
+            </div>
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <p class="testimonial-text">
+              "The premium plan's 1-on-1 tutoring sessions have been a
+              game-changer for my organic chemistry class. Worth every penny!"
+            </p>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="testimonial">
+            <div class="testimonial-header">
+              <div class="student-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="student-info">
+                <p class="student-name">Miguel Rodriguez</p>
+                <p class="student-details">Engineering Major, Senior Year</p>
+              </div>
+            </div>
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              "The study guides and practice quizzes prepared me perfectly for
+              my exams. I've recommended StudentHub to everyone in my class!"
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        <div class="faq-container">
+          <!-- FAQ Item 1 -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>How do I verify my student status?</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                You can verify your student status by uploading a valid student
+                ID or an official enrollment letter from your institution. Once
+                verified, you'll receive the student discount automatically
+                applied to your account.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 2 -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Can I switch between plans?</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Yes! You can upgrade or downgrade your plan at any time. When
+                upgrading, you'll be charged the prorated difference. When
+                downgrading, the new rate will apply at the start of your next
+                billing cycle.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 3 -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>How does the 7-day free trial work?</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                You'll get full access to all features of your selected plan for
+                7 days without being charged. You can cancel anytime during the
+                trial period and won't be billed. If you decide to continue,
+                your subscription will automatically start after the trial ends.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 4 -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>What subjects are covered in the study guides?</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Our study guides cover a wide range of subjects including
+                Mathematics, Sciences (Biology, Chemistry, Physics), Computer
+                Science, Engineering, Business, Economics, Arts, Humanities, and
+                more. We're constantly adding new subjects based on student
+                requests.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 5 -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Can I cancel my subscription anytime?</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Absolutely! You can cancel your subscription at any time from
+                your account settings. If you cancel, you'll still have access
+                to your plan until the end of your current billing period.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Section -->
+      <div class="cta-section">
+        <h2 class="cta-title">Ready to Boost Your Academic Success?</h2>
+        <p class="cta-description">
+          Join thousands of students who are achieving their educational goals
+          with our comprehensive study platform.
+        </p>
+        <div class="cta-buttons">
+          <button class="btn btn-free btn-large">Try For Free</button>
+          <button class="btn btn-basic btn-large">Get Started Today</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- HTML for the footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4>StudentHomes</h4>
+            <p>
+              The leading platform for student housing rentals. We connect
+              students with quality accommodations near their universities.
+            </p>
+            <div class="social-icons">
+              <a href="#" aria-label="Facebook"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a href="#" aria-label="Twitter"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="LinkedIn"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h5>Quick Links</h5>
+            <ul class="footer-links">
+              <li><a href="../Home/home.html">Home</a></li>
+              <li><a href="../user/user.html">Properties</a></li>
+              <li><a href="../rent/rent.html">Universities</a></li>
+              <li><a href="../about-us/about us.html">About Us</a></li>
+              <li><a href="../contact-us/contact us .html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5>For Students</h5>
+            <ul class="footer-links">
+              <li><a href="../about-us/about us.html">How It Works</a></li>
+              <li><a href="../about-us/about us.html">Student Resources</a></li>
+              <li><a href="../about-us/about us.html">Roommate Finder</a></li>
+              <li><a href="../about-us/about us.html">FAQs</a></li>
+              <li><a href="../about-us/about us.html">Student Blog</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5>Contact Us</h5>
+            <ul class="contact-info">
+              <li>
+                <i class="fas fa-map-marker-alt"></i> 123 University Ave, City
+              </li>
+              <li><i class="fas fa-phone"></i> (123) 456-7890</li>
+              <li><i class="fas fa-envelope"></i> info@studenthomes.com</li>
+            </ul>
+            <div class="newsletter-form">
+              <h5>Subscribe to Newsletter</h5>
+              <form id="footer-newsletter-form">
+                <div class="newsletter-input-group">
+                  <input
+                    type="email"
+                    placeholder="Your email address"
+                    required
+                  />
+                  <button type="submit" aria-label="Subscribe">
+                    <i class="fas fa-paper-plane"></i>
+                  </button>
+                </div>
+                <div class="newsletter-message" id="newsletter-message"></div>
+              </form>
+            </div>
+            <div class="support-btn">
+              <a href="../contact-us/contact us .html" class="btn">Support</a>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div class="footer-bottom">
+          <p>
+            © <span id="current-year"></span> StudentHomes. All rights reserved.
+          </p>
+          <div class="footer-legal">
+            <a href="../about-us/about us.html">Privacy Policy</a>
+            <a href="../about-us/about us.html">Terms of Service</a>
+            <a href="../about-us/about us.html">Cookies</a>
+          </div>
+        </div>
+      </div>
+      <button id="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+      </button>
+    </footer>
+    <script src="../plans/plans.js"></script>
+  </body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Scholar Space - Your academic resource platform">
+  <title>Scholar Space - Navigation</title>
+  <style>
+    /* Base styles */
+:root {
+  --primary-color: #3a56e4;
+  --primary-dark: #2a46d4;
+  --text-color: #333;
+  --bg-color: #f5f5f5;
+  --white: #ffffff;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --shadow-primary: 0 2px 4px rgba(58, 86, 228, 0.3);
+  --shadow-primary-hover: 0 4px 8px rgba(58, 86, 228, 0.4);
+  --transition-normal: all 0.3s ease;
+  --transition-fast: all 0.25s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  min-height: 100vh;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Navigation */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--white);
+  padding: 1rem 2rem;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 0.5rem;
+}
+
+.logo img {
+  height: 50px;
+  width: 50px;
+  object-fit: contain;
+}
+
+.logo span {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-color);
+  letter-spacing: 0.03rem;
+  transition: var(--transition-normal);
+}
+
+.logo:hover span,
+.logo:focus span {
+  color: var(--primary-color);
+}
+
+.logo:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  list-style: none;
+}
+
+.nav-links li {
+  margin-left: 2rem;
+  position: relative;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  letter-spacing: 0.02rem;
+  transition: var(--transition-fast);
+  display: inline-block;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+  color: var(--primary-color);
+}
+
+.nav-links a:hover::after,
+.nav-links a:focus::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+.nav-links a:focus {
+  outline: none;
+}
+
+.nav-links a.active {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* User Actions */
+.user-actions {
+  display: flex;
+  align-items: center;
+}
+
+.login-btn {
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 1rem;
+  font-weight: bold;
+  transition: var(--transition-normal);
+  box-shadow: var(--shadow-primary);
+}
+
+.login-btn:hover,
+.login-btn:focus {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary-hover);
+}
+
+.login-btn:active {
+  transform: translateY(0);
+}
+
+.login-btn:focus {
+  outline: 2px solid var(--primary-dark);
+  outline-offset: 2px;
+}
+
+.user-profile {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #e6e6e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: var(--transition-normal);
+  cursor: pointer;
+}
+
+.user-profile:hover,
+.user-profile:focus {
+  border-color: var(--primary-color);
+}
+
+.user-profile:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.user-profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-color);
+  transition: var(--transition-normal);
+  z-index: 10;
+}
+
+.hamburger:hover,
+.hamburger:focus {
+  color: var(--primary-color);
+}
+
+.hamburger:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+  }
+
+  .hamburger {
+    display: block;
+    order: 3;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    background-color: var(--white);
+    align-items: center;
+    justify-content: center;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    box-shadow: var(--shadow-md);
+    z-index: 5;
+  }
+
+  .nav-links.active {
+    transform: translateX(0);
+  }
+
+  .nav-links li {
+    margin: 1rem 0;
+    width: 80%;
+    text-align: center;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 0.75rem;
+    border-radius: 4px;
+  }
+
+  .nav-links a:hover,
+  .nav-links a:focus {
+    background-color: rgba(58, 86, 228, 0.1);
+  }
+
+  .nav-links a::after {
+    display: none;
+  }
+
+  .user-actions {
+    order: 2;
+    margin-left: auto;
+    margin-right: 1rem;
+  }
+
+  .logo {
+    order: 1;
+  }
+}
+  </style>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>.............
+  <header> 
+   <nav class="navbar" aria-label="Main navigation">
+      <a href="index.html" class="logo" aria-label="Scholar Space Home">
+        <img src="../images/logo.png" alt="Scholar Space Logo" width="50" height="50">
+        <span>Scholar Space</span>
+      </a>
+
+      <button class="hamburger" id="menu-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">
+        <span class="sr-only">Menu</span>
+        <span class="hamburger-icon">☰</span>
+      </button>
+
+      <ul class="nav-links" id="nav-menu">
+        <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+        <li><a href="rent.html">Rent</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+
+      <div class="user-actions">
+        <button class="login-btn" type="button">Log In</button>
+        <div class="user-profile" tabindex="0" aria-label="User profile">
+          <img src="images/profile.jpg" alt="" width="35" height="35">
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Your page content goes here -->
+  </main>
+
+<script>
+  // DOM Elements
+const menuToggle = document.getElementById('menu-toggle');
+const navMenu = document.getElementById('nav-menu');
+
+// Toggle mobile menu
+menuToggle.addEventListener('click', function() {
+  const isExpanded = this.getAttribute('aria-expanded') === 'true';
+  this.setAttribute('aria-expanded', !isExpanded);
+  navMenu.classList.toggle('active');
+  
+  // Prevent scrolling when menu is open
+  document.body.style.overflow = isExpanded ? '' : 'hidden';
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', function(event) {
+  if (navMenu.classList.contains('active') && 
+      !navMenu.contains(event.target) && 
+      event.target !== menuToggle) {
+    navMenu.classList.remove('active');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+});
+
+// Close menu when pressing Escape key
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape' && navMenu.classList.contains('active')) {
+    navMenu.classList.remove('active');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+});
+
+// Set active navigation link based on current page
+function setActiveNavLink() {
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const currentPath = window.location.pathname;
+  
+  navLinks.forEach(link => {
+    // Remove existing active class and aria-current
+    link.classList.remove('active');
+    link.removeAttribute('aria-current');
+    
+    // Get the path from the href attribute
+    const linkPath = new URL(link.href, window.location.origin).pathname;
+    
+    // Check if this link matches the current page
+    if (currentPath === linkPath || 
+        (currentPath === '/' && linkPath.includes('index.html'))) {
+      link.classList.add('active');
+      link.setAttribute('aria-current', 'page');
+    }
+  });
+}
+
+// Run when DOM is fully loaded
+document.addEventListener('DOMContentLoaded', setActiveNavLink);
+</script>
+</body>
+</html>

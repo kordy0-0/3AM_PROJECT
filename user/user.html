@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Housing Platform - Profile</title>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../user/user.css">
+</head>
+
+<body>
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loading-screen">
+    <div class="city-scene">
+      <div class="sun"></div>
+      <div class="cloud cloud-1"></div>
+      <div class="cloud cloud-2"></div>
+      <div class="skyline">
+        <div class="building building-1" id="building-1"></div>
+        <div class="building building-2" id="building-2"></div>
+        <div class="main-building" id="main-building">
+          <div class="roof"></div>
+          <div class="window-grid" id="window-grid">
+            <!-- Windows will be added by JavaScript -->
+          </div>
+          <div class="door"></div>
+        </div>
+        <div class="building building-3" id="building-3"></div>
+        <div class="building building-4" id="building-4"></div>
+        <div class="building building-5" id="building-5"></div>
+      </div>
+    </div>
+    <div class="loading-content">
+      <h1>Student Housing Platform</h1>
+      <p>Your perfect campus home awaits...</p>
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <div class="student-icons">
+        <div class="icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z"></path>
+          </svg>
+        </div>
+        <div class="icon">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12,5.5A3.5,3.5 0 0,1 15.5,9A3.5,3.5 0 0,1 12,12.5A3.5,3.5 0 0,1 8.5,9A3.5,3.5 0 0,1 12,5.5M5,8C5.56,8 6.08,8.15 6.53,8.42C6.38,9.85 6.8,11.27 7.66,12.38C7.16,13.34 6.16,14 5,14A3,3 0 0,1 2,11A3,3 0 0,1 5,8M19,8A3,3 0 0,1 22,11A3,3 0 0,1 19,14C17.84,14 16.84,13.34 16.34,12.38C17.2,11.27 17.62,9.85 17.47,8.42C17.92,8.15 18.44,8 19,8M5.5,18.25C5.5,16.18 8.41,14.5 12,14.5C15.59,14.5 18.5,16.18 18.5,18.25V20H5.5V18.25M0,20V18.5C0,17.11 1.89,15.94 4.45,15.6C3.86,16.28 3.5,17.22 3.5,18.25V20H0M24,20H20.5V18.25C20.5,17.22 20.14,16.28 19.55,15.6C22.11,15.94 24,17.11 24,18.5V20Z">
+            </path>
+          </svg>
+        </div>
+        <div class="icon">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12,3L1,9L12,15L23,9L12,3M12,16.5L2,10.5V17L12,23L22,17V10.5L12,16.5M8.47,5.88L9.4,8H14.6L15.53,5.88L18.41,7.96L15.53,5.88L13,3.24V6.12L12,7L11,6.12V3.24L8.47,5.88Z">
+            </path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar" aria-label="Main navigation">
+    <a href="index.html" class="logo" aria-label="Student Housing Platform Home">
+      <img src="../images/logo.png" alt="Student Housing Platform Logo" width="50" height="50">
+      <span>Student Housing</span>
+    </a>
+
+    <button class="hamburger" id="menu-toggle" aria-expanded="false" aria-controls="nav-menu"
+      aria-label="Toggle navigation menu">
+      <span class="sr-only">Menu</span>
+      <span class="hamburger-icon">☰</span>
+    </button>
+
+    <ul class="nav-links" id="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="rent.html">Apartments</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+      <li><a href="profile.html" class="active" aria-current="page">Profile</a></li>
+    </ul>
+
+    <div class="user-actions">
+      <div class="user-profile" tabindex="0" aria-label="User profile">
+        <img
+          src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+          alt="User profile" width="35" height="35">
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="page-content" id="page-content">
+    <div class="container">
+      <div class="profile-grid">
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <div class="card">
+            <div class="card-content">
+              <div class="profile-info">
+                <div class="avatar">
+                  <img
+                    src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                    alt="User profile">
+                </div>
+                <div class="user-details">
+                  <h2>Ahmed Mohamed</h2>
+                  <p class="text-muted">Student at Cairo University</p>
+                </div>
+                <div class="location">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>Cairo, Egypt</span>
+                </div>
+                <button class="btn btn-primary btn-full">Edit Profile</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-content">
+              <nav class="side-nav">
+                <button class="nav-btn">
+                  <i class="fas fa-user"></i>
+                  Profile
+                </button>
+                <button class="nav-btn">
+                  <i class="fas fa-bookmark"></i>
+                  Saved
+                </button>
+                <button class="nav-btn">
+                  <i class="fas fa-calendar"></i>
+                  Bookings
+                </button>
+                <button class="nav-btn">
+                  <i class="fas fa-cog"></i>
+                  Settings
+                </button>
+              </nav>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+          <div class="tabs">
+            <div class="tabs-list">
+              <button class="tab-btn active" data-tab="saved">Saved</button>
+              <button class="tab-btn" data-tab="bookings">Bookings</button>
+              <button class="tab-btn" data-tab="history">History</button>
+              <button class="tab-btn" data-tab="settings">Settings</button>
+            </div>
+
+            <!-- Saved Apartments Tab -->
+            <div class="tab-content active" id="saved">
+              <h2 class="section-title">Saved Apartments</h2>
+              <div class="apartments-grid">
+                <!-- Apartment Card 1 -->
+                <div class="card apartment-card">
+                  <div class="apartment-image">
+                    <img
+                      src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                      alt="Apartment 1">
+                    <button class="favorite-btn">
+                      <i class="fas fa-heart"></i>
+                    </button>
+                  </div>
+                  <div class="card-content">
+                    <div class="apartment-header">
+                      <h3>Premium Student Apartment</h3>
+                      <span class="badge">Available</span>
+                    </div>
+                    <div class="apartment-location">
+                      <i class="fas fa-map-marker-alt"></i>
+                      <span>Maadi, Cairo</span>
+                    </div>
+                    <div class="apartment-details">
+                      <div class="apartment-features">
+                        <i class="fas fa-home"></i>
+                        <span>2 Bedrooms, 1 Bath</span>
+                      </div>
+                      <p class="price">1200 EGP/month</p>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <button class="btn btn-primary btn-full">View Details</button>
+                  </div>
+                </div>
+
+                <!-- Apartment Card 2 -->
+                <div class="card apartment-card">
+                  <div class="apartment-image">
+                    <img
+                      src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                      alt="Apartment 2">
+                    <button class="favorite-btn">
+                      <i class="fas fa-heart"></i>
+                    </button>
+                  </div>
+                  <div class="card-content">
+                    <div class="apartment-header">
+                      <h3>Near University Apartment</h3>
+                      <span class="badge">Available</span>
+                    </div>
+                    <div class="apartment-location">
+                      <i class="fas fa-map-marker-alt"></i>
+                      <span>Giza, Cairo</span>
+                    </div>
+                    <div class="apartment-details">
+                      <div class="apartment-features">
+                        <i class="fas fa-home"></i>
+                        <span>1 Bedroom, 1 Bath</span>
+                      </div>
+                      <p class="price">900 EGP/month</p>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <button class="btn btn-primary btn-full">View Details</button>
+                  </div>
+                </div>
+
+                <!-- Apartment Card 3 -->
+                <div class="card apartment-card">
+                  <div class="apartment-image">
+                    <img
+                      src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                      alt="Apartment 3">
+                    <button class="favorite-btn">
+                      <i class="fas fa-heart"></i>
+                    </button>
+                  </div>
+                  <div class="card-content">
+                    <div class="apartment-header">
+                      <h3>Luxury Studio</h3>
+                      <span class="badge">Available</span>
+                    </div>
+                    <div class="apartment-location">
+                      <i class="fas fa-map-marker-alt"></i>
+                      <span>Nasr City, Cairo</span>
+                    </div>
+                    <div class="apartment-details">
+                      <div class="apartment-features">
+                        <i class="fas fa-home"></i>
+                        <span>Studio, 1 Bath</span>
+                      </div>
+                      <p class="price">1100 EGP/month</p>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <button class="btn btn-primary btn-full">View Details</button>
+                  </div>
+                </div>
+
+                <!-- Apartment Card 4 -->
+                <div class="card apartment-card">
+                  <div class="apartment-image">
+                    <img
+                      src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                      alt="Apartment 4">
+                    <button class="favorite-btn">
+                      <i class="fas fa-heart"></i>
+                    </button>
+                  </div>
+                  <div class="card-content">
+                    <div class="apartment-header">
+                      <h3>Shared Student Apartment</h3>
+                      <span class="badge">Available</span>
+                    </div>
+                    <div class="apartment-location">
+                      <i class="fas fa-map-marker-alt"></i>
+                      <span>Dokki, Cairo</span>
+                    </div>
+                    <div class="apartment-details">
+                      <div class="apartment-features">
+                        <i class="fas fa-home"></i>
+                        <span>3 Bedrooms, 2 Baths</span>
+                      </div>
+                      <p class="price">800 EGP/month</p>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <button class="btn btn-primary btn-full">View Details</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bookings Tab -->
+            <div class="tab-content" id="bookings">
+              <div class="card">
+                <div class="card-header">
+                  <h2>Current Bookings</h2>
+                  <p class="text-muted">Manage your apartment bookings</p>
+                </div>
+                <div class="card-content">
+                  <div class="bookings-list">
+                    <!-- Booking 1 -->
+                    <div class="card booking-card">
+                      <div class="booking-content">
+                        <div class="booking-grid">
+                          <img
+                            src="https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                            alt="Booking 1" class="booking-image">
+                          <div class="booking-details">
+                            <div class="booking-header">
+                              <h3>Luxury Student Apartment</h3>
+                              <span class="badge badge-success">Confirmed</span>
+                            </div>
+                            <div class="booking-location">
+                              <i class="fas fa-map-marker-alt"></i>
+                              <span>Dokki, Cairo</span>
+                            </div>
+                            <div class="booking-date">
+                              <i class="fas fa-calendar"></i>
+                              <span>September 1, 2023 - August 31, 2024</span>
+                            </div>
+                            <p class="price">1500 EGP/month</p>
+                            <div class="booking-actions">
+                              <button class="btn btn-sm btn-primary">Booking Details</button>
+                              <button class="btn btn-sm btn-outline">Cancel Booking</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Booking 2 -->
+                    <div class="card booking-card">
+                      <div class="booking-content">
+                        <div class="booking-grid">
+                          <img
+                            src="https://images.unsplash.com/photo-1536376072261-38c75010e6c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                            alt="Booking 2" class="booking-image">
+                          <div class="booking-details">
+                            <div class="booking-header">
+                              <h3>Studio Near University</h3>
+                              <span class="badge badge-success">Confirmed</span>
+                            </div>
+                            <div class="booking-location">
+                              <i class="fas fa-map-marker-alt"></i>
+                              <span>Giza, Cairo</span>
+                            </div>
+                            <div class="booking-date">
+                              <i class="fas fa-calendar"></i>
+                              <span>October 1, 2023 - September 30, 2024</span>
+                            </div>
+                            <p class="price">1200 EGP/month</p>
+                            <div class="booking-actions">
+                              <button class="btn btn-sm btn-primary">Booking Details</button>
+                              <button class="btn btn-sm btn-outline">Cancel Booking</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- History Tab -->
+            <div class="tab-content" id="history">
+              <div class="card">
+                <div class="card-header">
+                  <h2>Booking History</h2>
+                  <p class="text-muted">Your previous bookings</p>
+                </div>
+                <div class="card-content">
+                  <div class="bookings-list">
+                    <!-- History 1 -->
+                    <div class="card booking-card">
+                      <div class="booking-content">
+                        <div class="booking-grid">
+                          <img
+                            src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                            alt="History 1" class="booking-image">
+                          <div class="booking-details">
+                            <div class="booking-header">
+                              <h3>Student Apartment</h3>
+                              <span class="badge badge-neutral">Expired</span>
+                            </div>
+                            <div class="booking-location">
+                              <i class="fas fa-map-marker-alt"></i>
+                              <span>Giza, Cairo</span>
+                            </div>
+                            <div class="booking-date">
+                              <i class="fas fa-calendar"></i>
+                              <span>September 1, 2022 - August 31, 2023</span>
+                            </div>
+                            <p class="price">1300 EGP/month</p>
+                            <button class="btn btn-sm btn-primary">View Details</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- History 2 -->
+                    <div class="card booking-card">
+                      <div class="booking-content">
+                        <div class="booking-grid">
+                          <img
+                            src="https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                            alt="History 2" class="booking-image">
+                          <div class="booking-details">
+                            <div class="booking-header">
+                              <h3>Student Studio</h3>
+                              <span class="badge badge-neutral">Expired</span>
+                            </div>
+                            <div class="booking-location">
+                              <i class="fas fa-map-marker-alt"></i>
+                              <span>Nasr City, Cairo</span>
+                            </div>
+                            <div class="booking-date">
+                              <i class="fas fa-calendar"></i>
+                              <span>September 1, 2021 - August 31, 2022</span>
+                            </div>
+                            <p class="price">1100 EGP/month</p>
+                            <button class="btn btn-sm btn-primary">View Details</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- History 3 -->
+                    <div class="card booking-card">
+                      <div class="booking-content">
+                        <div class="booking-grid">
+                          <img
+                            src="https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                            alt="History 3" class="booking-image">
+                          <div class="booking-details">
+                            <div class="booking-header">
+                              <h3>Shared Room</h3>
+                              <span class="badge badge-neutral">Expired</span>
+                            </div>
+                            <div class="booking-location">
+                              <i class="fas fa-map-marker-alt"></i>
+                              <span>Dokki, Cairo</span>
+                            </div>
+                            <div class="booking-date">
+                              <i class="fas fa-calendar"></i>
+                              <span>September 1, 2020 - August 31, 2021</span>
+                            </div>
+                            <p class="price">800 EGP/month</p>
+                            <button class="btn btn-sm btn-primary">View Details</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div class="tab-content" id="settings">
+              <div class="card">
+                <div class="card-header">
+                  <h2>Account Settings</h2>
+                  <p class="text-muted">Manage your account settings and preferences</p>
+                </div>
+                <div class="card-content">
+                  <form class="settings-form">
+                    <div class="form-section">
+                      <h3>Personal Information</h3>
+                      <div class="form-grid">
+                        <div class="form-group">
+                          <label for="firstName">First Name</label>
+                          <input type="text" id="firstName" value="Ahmed" class="form-control">
+                        </div>
+                        <div class="form-group">
+                          <label for="lastName">Last Name</label>
+                          <input type="text" id="lastName" value="Mohamed" class="form-control">
+                        </div>
+                        <div class="form-group">
+                          <label for="email">Email</label>
+                          <input type="email" id="email" value="ahmed@example.com" class="form-control">
+                        </div>
+                        <div class="form-group">
+                          <label for="phone">Phone Number</label>
+                          <input type="tel" id="phone" value="01xxxxxxxx" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-section">
+                      <h3>Notification Preferences</h3>
+                      <div class="form-group checkbox-group">
+                        <div class="checkbox-item">
+                          <input type="checkbox" id="emailNotifications" checked>
+                          <label for="emailNotifications">Email Notifications</label>
+                        </div>
+                        <div class="checkbox-item">
+                          <input type="checkbox" id="smsNotifications" checked>
+                          <label for="smsNotifications">SMS Notifications</label>
+                        </div>
+                        <div class="checkbox-item">
+                          <input type="checkbox" id="newListings" checked>
+                          <label for="newListings">New Apartment Listings</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-actions">
+                      <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../user/user.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Housing Rentals</title>
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="../css/home.css">
+  </head>
+
+  <body>
+    <div class="loading-screen" id="loading-screen">
+      <div class="city-scene">
+        <div class="sun"></div>
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="skyline">
+          <div class="building building-1" id="building-1"></div>
+          <div class="building building-2" id="building-2"></div>
+          <div class="main-building" id="main-building">
+            <div class="roof"></div>
+            <div class="window-grid" id="window-grid">
+              <!-- Windows will be added by JavaScript -->
+            </div>
+            <div class="door"></div>
+          </div>
+          <div class="building building-3" id="building-3"></div>
+          <div class="building building-4" id="building-4"></div>
+          <div class="building building-5" id="building-5"></div>
+        </div>
+      </div>
+      <div class="loading-content">
+        <h1>Student Apartments</h1>
+        <p>Your perfect campus home awaits...</p>
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div class="student-icons">
+          <div class="icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z"></path>
+            </svg>
+          </div>
+          <div class="icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M12,5.5A3.5,3.5 0 0,1 15.5,9A3.5,3.5 0 0,1 12,12.5A3.5,3.5 0 0,1 8.5,9A3.5,3.5 0 0,1 12,5.5M5,8C5.56,8 6.08,8.15 6.53,8.42C6.38,9.85 6.8,11.27 7.66,12.38C7.16,13.34 6.16,14 5,14A3,3 0 0,1 2,11A3,3 0 0,1 5,8M19,8A3,3 0 0,1 22,11A3,3 0 0,1 19,14C17.84,14 16.84,13.34 16.34,12.38C17.2,11.27 17.62,9.85 17.47,8.42C17.92,8.15 18.44,8 19,8M5.5,18.25C5.5,16.18 8.41,14.5 12,14.5C15.59,14.5 18.5,16.18 18.5,18.25V20H5.5V18.25M0,20V18.5C0,17.11 1.89,15.94 4.45,15.6C3.86,16.28 3.5,17.22 3.5,18.25V20H0M24,20H20.5V18.25C20.5,17.22 20.14,16.28 19.55,15.6C22.11,15.94 24,17.11 24,18.5V20Z"></path>
+            </svg>
+          </div>
+          <div class="icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M12,3L1,9L12,15L23,9L12,3M12,16.5L2,10.5V17L12,23L22,17V10.5L12,16.5M8.47,5.88L9.4,8H14.6L15.53,5.88L18.41,7.96L15.53,5.88L13,3.24V6.12L12,7L11,6.12V3.24L8.47,5.88Z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+   <!-- Replace your current navbar with this -->
+<nav class="navbar" aria-label="Main navigation">
+  <a href="../Home/home.html" class="logo" aria-label="Scholar Space Home">
+    <img src="../images/logo.png" alt="Scholar Space Logo" width="50" height="50">
+    <span>Scholar Space</span>
+  </a>
+
+  <button class="hamburger" id="menu-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">
+    <span class="sr-only">Menu</span>
+    <span class="hamburger-icon">☰</span>
+  </button>
+
+  <ul class="nav-links" id="nav-menu">
+    <li><a href="../Home/home.html" class="active" aria-current="page">Home</a></li>
+    <li><a href="../rent/rent.html">Rent</a></li>
+    <li><a href="../about-us/about us.html">About Us</a></li>
+    <li><a href="../contact-us/contact us .html">Contact Us</a></li>
+  </ul>
+
+  <div class="user-actions">
+    <button class="login-btn" type="button">Log In</button>
+    <div class="user-profile" tabindex="0" aria-label="User profile">
+      <img src="../images/user.jpg" alt="" width="35" height="35">
+    </div>
+  </div>
+</nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <h1 id="hero-title">Find Your Perfect Student Accommodation</h1>
+        <p class="lead" id="hero-subtitle">
+          Thousands of verified properties near top universities
+        </p>
+
+        <div class="search-box">
+          <form id="search-form">
+            <div class="search-row">
+              <div class="search-col">
+                <select id="university">
+                  <option selected>Select University</option>
+                  <option>University A</option>
+                  <option>University B</option>
+                  <option>University C</option>
+                  <option>University D</option>
+                </select>
+              </div>
+              <div class="search-col">
+                <select id="property-type">
+                  <option selected>Property Type</option>
+                  <option>Shared Apartment</option>
+                  <option>Studio</option>
+                  <option>Private Room</option>
+                  <option>Dormitory</option>
+                </select>
+              </div>
+              <div class="search-col">
+                <select id="budget">
+                  <option selected>Budget</option>
+                  <option>$300 - $500</option>
+                  <option>$500 - $700</option>
+                  <option>$700 - $900</option>
+                  <option>$900+</option>
+                </select>
+              </div>
+              <div class="search-col">
+                <button type="submit" class="btn btn-primary">Search</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Properties -->
+    <section class="properties-section">
+      <div class="container">
+        <h2 class="section-title">Featured Student Properties</h2>
+        <div class="property-grid">
+          <!-- Property 1 -->
+          <a href="../details/details.html">
+            <div class="property-card">
+              <div
+                class="property-image"
+                style="
+                  background-image: url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80');
+                "
+              ></div>
+              <div class="card-body">
+                <div class="property-meta">
+                  <span class="badge bg-primary">Shared Apartment</span>
+                  <span class="price">$450/month</span>
+                </div>
+                <h5 class="card-title">Sunny Campus Apartment</h5>
+                <p class="location">
+                  <i class="fas fa-map-marker-alt"></i> 0.5 miles from
+                  University A
+                </p>
+                <div class="property-features">
+                  <span><i class="fas fa-bed"></i> 3 Beds</span>
+                  <span><i class="fas fa-bath"></i> 2 Baths</span>
+                  <span><i class="fas fa-wifi"></i> Free WiFi</span>
+                </div>
+              </div>
+            </div>
+          </a>
+          <!-- Property 2 -->
+          <a href="../details/details.html">
+            <div class="property-card">
+              <div
+                class="property-image"
+                style="
+                  background-image: url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80');
+                "
+              ></div>
+              <div class="card-body">
+                <div class="property-meta">
+                  <span class="badge bg-success">Studio</span>
+                  <span class="price">$550/month</span>
+                </div>
+                <h5 class="card-title">Modern Student Studio</h5>
+                <p class="location">
+                  <i class="fas fa-map-marker-alt"></i> 0.3 miles from
+                  University B
+                </p>
+                <div class="property-features">
+                  <span><i class="fas fa-bed"></i> 1 Bed</span>
+                  <span><i class="fas fa-bath"></i> 1 Bath</span>
+                  <span><i class="fas fa-utensils"></i> Kitchen</span>
+                </div>
+              </div>
+            </div>
+          </a>
+          <!-- Property 3 -->
+          <a href="../details/details.html">
+            <div class="property-card">
+              <div
+                class="property-image"
+                style="
+                  background-image: url('https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80');
+                "
+              ></div>
+              <div class="card-body">
+                <div class="property-meta">
+                  <span class="badge bg-warning">Private Room</span>
+                  <span class="price">$380/month</span>
+                </div>
+                <h5 class="card-title">Cozy Campus Room</h5>
+                <p class="location">
+                  <i class="fas fa-map-marker-alt"></i> 0.7 miles from
+                  University C
+                </p>
+                <div class="property-features">
+                  <span><i class="fas fa-bed"></i> 1 Bed</span>
+                  <span><i class="fas fa-users"></i> 3 Roommates</span>
+                  <span><i class="fas fa-parking"></i> Parking</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="text-center">
+          <a href="../details/details.html" class="btn btn-outline"
+            >View All Properties</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="features-section">
+      <div class="container">
+        <h2 class="section-title">Why Choose StudentHomes</h2>
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <h4>Verified Properties</h4>
+            <p>
+              All our listings are verified to ensure quality and safety
+              standards for students.
+            </p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-university"></i>
+            </div>
+            <h4>Close to Campus</h4>
+            <p>
+              Find accommodations within walking distance to your university or
+              college.
+            </p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-hand-holding-usd"></i>
+            </div>
+            <h4>Student-Friendly Prices</h4>
+            <p>
+              Affordable options that fit student budgets with no hidden fees.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section">
+      <div class="container">
+        <h2 class="section-title">What Students Say</h2>
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <img
+                src="https://randomuser.me/api/portraits/women/44.jpg"
+                class="testimonial-img"
+                alt="Student"
+              />
+              <div>
+                <h5>Sarah Johnson</h5>
+                <small>University A</small>
+              </div>
+            </div>
+            <p>
+              "Found my perfect apartment through StudentHomes. The process was
+              smooth and the support team was very helpful!"
+            </p>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <img
+                src="https://randomuser.me/api/portraits/men/32.jpg"
+                class="testimonial-img"
+                alt="Student"
+              />
+              <div>
+                <h5>Michael Chen</h5>
+                <small>University B</small>
+              </div>
+            </div>
+            <p>
+              "As an international student, finding accommodation was my biggest
+              worry. StudentHomes made it easy and stress-free."
+            </p>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <img
+                src="https://randomuser.me/api/portraits/women/68.jpg"
+                class="testimonial-img"
+                alt="Student"
+              />
+              <div>
+                <h5>Emma Rodriguez</h5>
+                <small>University C</small>
+              </div>
+            </div>
+            <p>
+              "The verified listings gave me peace of mind. I found roommates
+              and a great apartment all in one place!"
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Universities We Serve -->
+    <section class="universities-section">
+      <div class="container">
+        <h2 class="section-title">Universities We Serve</h2>
+        <div class="universities-grid">
+          <div class="university-item">
+            <img
+              src="https://via.placeholder.com/150"
+              class="university-logo"
+              alt="University Logo"
+            />
+            <h6>University A</h6>
+          </div>
+          <div class="university-item">
+            <img
+              src="https://via.placeholder.com/150"
+              class="university-logo"
+              alt="University Logo"
+            />
+            <h6>University B</h6>
+          </div>
+          <div class="university-item">
+            <img
+              src="https://via.placeholder.com/150"
+              class="university-logo"
+              alt="University Logo"
+            />
+            <h6>University C</h6>
+          </div>
+          <div class="university-item">
+            <img
+              src="https://via.placeholder.com/150"
+              class="university-logo"
+              alt="University Logo"
+            />
+            <h6>University D</h6>
+          </div>
+          <div class="university-item">
+            <img
+              src="https://via.placeholder.com/150"
+              class="university-logo"
+              alt="University Logo"
+            />
+            <h6>University E</h6>
+          </div>
+          <div class="university-item">
+            <img
+              src="https://via.placeholder.com/150"
+              class="university-logo"
+              alt="University Logo"
+            />
+            <h6>University F</h6>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+      <div class="container">
+        <h2>Ready to Find Your Student Home?</h2>
+        <p class="lead">
+          Join thousands of students who found their perfect accommodation with
+          us
+        </p>
+        <div class="cta-buttons">
+          <a href="../rent/rent.html" class="btn btn-light">Browse Properties</a>
+          <a href="../insert/insert.html" class="btn btn-outline-light">List Your Property</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+  <!-- HTML for the footer -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>StudentHomes</h4>
+        <p>
+          The leading platform for student housing rentals. We connect
+          students with quality accommodations near their universities.
+        </p>
+        <div class="social-icons">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <ul class="footer-links">
+          <li><a href="../Home/home.html">Home</a></li>
+          <li><a href="../user/user.html">Properties</a></li>
+          <li><a href="../rent/rent.html">Universities</a></li>
+          <li><a href="../about-us/about us.html">About Us</a></li>
+          <li><a href="../contact-us/contact us .html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>For Students</h5>
+        <ul class="footer-links">
+          <li><a href="../about-us/about us.html">How It Works</a></li>
+          <li><a href="../about-us/about us.html">Student Resources</a></li>
+          <li><a href="../about-us/about us.html">Roommate Finder</a></li>
+          <li><a href="../about-us/about us.html">FAQs</a></li>
+          <li><a href="../about-us/about us.html">Student Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact Us</h5>
+        <ul class="contact-info">
+          <li>
+            <i class="fas fa-map-marker-alt"></i> 123 University Ave, City
+          </li>
+          <li><i class="fas fa-phone"></i> (123) 456-7890</li>
+          <li><i class="fas fa-envelope"></i> info@studenthomes.com</li>
+        </ul>
+        <div class="newsletter-form">
+          <h5>Subscribe to Newsletter</h5>
+          <form id="footer-newsletter-form">
+            <div class="newsletter-input-group">
+              <input type="email" placeholder="Your email address" required>
+              <button type="submit" aria-label="Subscribe">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+            <div class="newsletter-message" id="newsletter-message"></div>
+          </form>
+        </div>
+        <div class="support-btn">
+          <a href="../contact-us/contact us .html" class="btn">Support</a>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="footer-bottom">
+      <p>© <span id="current-year"></span> StudentHomes. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="../about-us/about us.html">Privacy Policy</a>
+        <a href="../about-us/about us.html">Terms of Service</a>
+        <a href="../about-us/about us.html">Cookies</a>
+      </div>
+    </div>
+  </div>
+  <button id="back-to-top" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+</footer>
+   <script src="../Home/home.js"></script>
+  </body>
+</html>
