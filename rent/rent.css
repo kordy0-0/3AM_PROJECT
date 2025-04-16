@@ -1,51 +1,51 @@
 :root {
-  --primary-color: #0d6efd;
-  --primary-dark: #0b5ed7;
-  --secondary-color: #f8f9fa;
-  --text-color: #212529;
-  --light-gray: #e9ecef;
+  /* Core color palette */
+  --primary-color: #123458;
+  --primary-dark: #0a2033;
+  --secondary-color: #F1EFEC;
+  --text-color: #030303;
+  --light-gray: #D4C9BE;
   --gray: #6c757d;
-  --dark: #212529;
-  --white: #ffffff;
-  --shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-  --shadow-lg: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --dark: #030303;
+  --white: #F1EFEC;
+  --shadow: 0 0.125rem 0.25rem rgba(3, 3, 3, 0.075);
+  --shadow-lg: 0 0.5rem 1rem rgba(3, 3, 3, 0.15);
 
   /* Loading screen variables */
-  --primary: #3498db;
-  --primary-light: #a0cfff;
-  --secondary: #e74c3c;
-  --secondary-light: #ff7b6b;
-  --accent: #f1c40f;
-  --accent-light: #ffe97f;
-  --dark-light: #34495e;
-  --light: #ecf0f1;
-  --light-dark: #bdc3c7;
-  --success: #2ecc71;
-  --purple: #9b59b6;
-  --teal: #1abc9c;
-  --gradient-start: #6a11cb;
-  --gradient-end: #2575fc;
-  --window-glow: rgba(255, 235, 59, 0.7);
-  --shadow-light: rgba(0, 0, 0, 0.1);
-  --shadow-medium: rgba(0, 0, 0, 0.2);
-  --shadow-dark: rgba(0, 0, 0, 0.3);
+  --primary: #123458;
+  --primary-light: #1e4e7c;
+  --secondary: #D4C9BE;
+  --secondary-light: #e5ded5;
+  --accent: #F1EFEC;
+  --accent-light: #fbfaf9;
+  --dark-light: #252525;
+  --light: #F1EFEC;
+  --light-dark: #D4C9BE;
+  --success: #123458;
+  --purple: #123458;
+  --teal: #123458;
+  --gradient-start: #123458;
+  --gradient-end: #0a2033;
+  --window-glow: rgba(212, 201, 190, 0.7);
+  --shadow-light: rgba(3, 3, 3, 0.1);
+  --shadow-medium: rgba(3, 3, 3, 0.2);
+  --shadow-dark: rgba(3, 3, 3, 0.3);
 }
 
 /* Base styles */
 :root {
-  --primary-color: #3a56e4;
-  --primary-dark: #2a46d4;
-  --text-color: #333;
-  --bg-color: #f5f5f5;
-  --white: #ffffff;
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
-  --shadow-primary: 0 2px 4px rgba(58, 86, 228, 0.3);
-  --shadow-primary-hover: 0 4px 8px rgba(58, 86, 228, 0.4);
+  --primary-color: #123458;
+  --primary-dark: #0a2033;
+  --text-color: #030303;
+  --bg-color: #F1EFEC;
+  --white: #F1EFEC;
+  --shadow-sm: 0 2px 4px rgba(3, 3, 3, 0.1);
+  --shadow-md: 0 4px 8px rgba(3, 3, 3, 0.1);
+  --shadow-primary: 0 2px 4px rgba(18, 52, 88, 0.3);
+  --shadow-primary-hover: 0 4px 8px rgba(18, 52, 88, 0.4);
   --transition-normal: all 0.3s ease;
   --transition-fast: all 0.25s ease;
 }
-
 * {
   margin: 0;
   padding: 0;
@@ -382,7 +382,7 @@ ul {
 
 /* Hero Section */
 .hero-section {
-  background: linear-gradient(rgba(13, 110, 253, 0.8), rgba(11, 94, 215, 0.9)),
+  background: linear-gradient(#123458),
     url("https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80");
   background-size: cover;
   background-position: center;

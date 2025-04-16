@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const getAllWindows = () => document.querySelectorAll(".window");
 
   // Set loading duration to 3 seconds
-  const loadingDuration = 3000;
+  const loadingDuration = 1000;
   const startTime = Date.now();
   const endTime = startTime + loadingDuration;
 
